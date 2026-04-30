@@ -46,14 +46,17 @@ export ANTHROPIC_API_KEY=sk-ant-...
 
 ## Build gas city from a known commit
 
-Either upstream or fork — **but record which.** The prior comment cited
-four upstream SHAs (`513a1d12`, `9af96b94`, `73f3e1da`, `1543a77f`)
-that don't resolve in `esciara/gascity`; the analog commit in the fork
-appears to be `cf64aca` (`fix(session): preserve in_progress claims
-across worker churn`, 2026-04-28).
+Either upstream or fork — **but record which.** The four SHAs cited in
+#458 (`513a1d12`, `9af96b94`, `73f3e1da`, `1543a77f`) are all valid
+merged commits on upstream `gastownhall/gascity`, but none of them
+resolve in `esciara/gascity` under those identifiers. The fork
+appears to carry rebased equivalents (e.g. `cf64aca`,
+`fix(session): preserve in_progress claims across worker churn`,
+2026-04-28). Build from a deployment whose commit list you can match
+against the four upstream SHAs.
 
 ```bash
-# Option A — upstream
+# Option A — upstream (matches the SHAs cited in #458 directly)
 git clone https://github.com/gastownhall/gascity.git
 cd gascity
 git log --oneline | head -5  # record this in your measurement notes
@@ -62,6 +65,10 @@ git log --oneline | head -5  # record this in your measurement notes
 git clone https://github.com/esciara/gascity.git
 cd gascity
 git checkout claude/review-claude-context-tokens-9paxM
+# Add upstream so you can compare
+git remote add upstream https://github.com/gastownhall/gascity.git
+git fetch upstream
+git cherry -v upstream/main HEAD | head -40  # what's missing/diverged
 git log --oneline | head -5  # record this
 
 # Build
@@ -72,13 +79,17 @@ gc version
 Confirm the fixes that matter are in:
 
 ```bash
-# Substring search for the suspension / pending_create_claim themes
+# On upstream, direct lookup works:
+git show 513a1d12 9af96b94 73f3e1da 1543a77f --stat --format="=== %h %s ==="
+
+# On the fork, search by theme since the SHAs differ:
 git log --all --oneline --grep="pending_create_claim" --grep="wait-held" \
   --grep="named session" --grep="suspension" -i | head
 ```
 
-If none of the four upstream SHAs resolve, note which thematically-
-matching commits *are* present and call that out in the measurement
+If you're on the fork and one of the four upstream SHAs has no
+equivalent locally, note which thematically-matching commits *are*
+present (or absent) and call that out in the measurement
 report. Re-measurement on a deployment without those fixes would not
 refute (or confirm) #458's cost numbers.
 

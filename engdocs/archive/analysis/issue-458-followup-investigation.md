@@ -23,14 +23,16 @@ Live items (1, 2-cadence, 3) are in
 | (3) `exec:` win quantification | Compare LLM vs `exec:` cost for the deterministic role | **cannot** — needs running deployment |
 | (5) Client-side `--rig` feasibility | Code analysis | **done** — see "Client-side rig filter" below |
 
-## Item (2) static — SHA mismatch
+## Item (2) static — upstream-only SHAs
 
 The four short SHAs cited in #458 (`513a1d12`, `9af96b94`, `73f3e1da`,
-`1543a77f`) **do not resolve in this checkout** (`esciara/gascity`,
-branch `claude/review-claude-context-tokens-9paxM`). `git log --all`
-finds none of them.
+`1543a77f`) **resolve on upstream `gastownhall/gascity` (all four are
+in merged PRs)** but do **not** resolve in this checkout
+(`esciara/gascity`, branch `claude/review-claude-context-tokens-9paxM`).
+`git log --all` against the fork finds none of them.
 
-Search by message keyword turned up one thematically-adjacent commit:
+Search by message keyword on the fork turned up one thematically-
+adjacent commit:
 
 > **cf64aca** (2026-04-28) — `fix(session): preserve in_progress claims
 > across worker churn`. Three interacting bugs that orphaned in_progress
@@ -41,16 +43,17 @@ Search by message keyword turned up one thematically-adjacent commit:
 > non-session work is still assigned to it.
 
 That commit covers similar ground to #458's "preserve
-`pending_create_claim` across named session reopen" but is a different
-SHA, so the fork is either behind on the upstream fixes or has them
-under different commit hashes (squash/rebase).
+`pending_create_claim` across named session reopen" theme but lives
+under a different SHA — consistent with the fork carrying its own
+rebased/cherry-picked equivalents rather than the upstream merge SHAs.
 
-**Implication:** the prior comment's claim that the suspension fix
-"already shipped (commit 513a1d12)" cannot be verified in this fork.
-Whoever runs the live re-measurement (item 1, 2-cadence, 3) must
-**explicitly verify the commit list** on the target deployment — pick
-either upstream-by-SHA or build from the fork on a known commit and
-record which fixes are in.
+**Implication:** the upstream fixes are real and merged. What can't be
+asserted from this checkout is whether the *fork* has all four
+equivalents present. Whoever runs the live re-measurement
+(item 1, 2-cadence, 3) should **record the build's commit list** —
+either build from upstream at a known SHA, or build from the fork and
+run `git cherry -v upstream/main HEAD` (after fetching upstream) to see
+which upstream commits are missing or carry different SHAs locally.
 
 ## Item (5) — client-side `--rig` feasibility (the real picture)
 
