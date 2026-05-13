@@ -36,38 +36,60 @@ understand or operate Gas City.
 
 ---
 
-## 2. Findings (initial critical analysis)
+## 2. Findings
 
-Numbered for traceability into the work plan in §4. Severity:
-**P0** (blocks user onboarding), **P1** (significant friction), **P2**
-(polish / longer-term).
+Each finding is tagged **P0** (blocks user onboarding), **P1** (significant
+friction), or **P2** (polish / longer-term). Numbered for traceability
+into the work plan in §4.
 
-### F1 — Mental model lives in the wrong repo (P0)
+### 2.1 Finding 1 — No top-down view of how Gas City works (P0)
 
-The Nine Concepts (Session, Task Store, Event Bus, Config, Prompt
-Templates, Messaging, Formulas, Dispatch, Health Patrol) — the entire
-conceptual spine of the SDK — are documented in
-[engdocs/architecture/nine-concepts.md](../architecture/nine-concepts.md)
-and never explained in `docs/`.
+`docs/` has no high-level explanation of Gas City as an orchestrator.
+An engineer arriving cold cannot answer "what is this system, how do its
+parts hang together, how does a piece of work flow through it, how are
+agents spawned and kept alive, how do they talk to each other" from
+user docs alone.
 
-- [docs/index.mdx](../../docs/index.mdx) tells users to read `engdocs/`.
-- [docs/getting-started/coming-from-gastown.md](../../docs/getting-started/coming-from-gastown.md)
-  explicitly sends Gas Town migrators to
-  `engdocs/architecture/nine-concepts`.
+What's needed is two pages, both currently absent from `docs/`:
 
-Relevant engdocs source material that should be promoted/adapted:
+**(a) An architecture overview** — top-down prose plus at least two
+diagrams:
 
-- `engdocs/architecture/nine-concepts.md`
-- `engdocs/architecture/glossary.md`
-- `engdocs/architecture/life-of-a-bead.md`
-- `engdocs/architecture/life-of-a-molecule.md`
-- `engdocs/architecture/index.md`
+- **Structural diagram:** the components that exist (city → rigs →
+  agents → sessions; beads store; event bus; controller) and how they
+  connect.
+- **Interactional / lifecycle diagram:** how a piece of work flows
+  through the system — e.g. `gc sling` → bead created → agent
+  selected → session spawned → prompt rendered → nudge → completion
+  → events emitted. A health/keepalive flow (patrol → stall detection
+  → restart with backoff) is a strong candidate for a third diagram.
 
-These are written for contributors today; they need a user-tone
-rewrite (less "invariant" / "layer N", more "what this is and why
-you care").
+This is the page a user needs *first*, both to evaluate fit and to
+form a working mental model.
 
-### F2 — PackV1 / PackV2 contradiction in the tutorial path (P0)
+**(b) A primitives reference** — the Nine Concepts (Session, Task
+Store, Event Bus, Config, Prompt Templates, Messaging, Formulas,
+Dispatch, Health Patrol) rewritten in user tone and positioned as a
+deeper reference *introduced by* the overview, not as the entry
+point. The Nine Concepts are bottom-up building blocks; they do not
+teach the system on their own.
+
+Both currently live only in `engdocs/architecture/` (contributor tone),
+and [docs/index.mdx](../../docs/index.mdx) plus
+[coming-from-gastown.md](../../docs/getting-started/coming-from-gastown.md)
+send users there as required reading.
+
+Relevant engdocs source material to adapt:
+
+- `engdocs/architecture/index.md` — overview seed
+- `engdocs/architecture/life-of-a-bead.md`,
+  `engdocs/architecture/life-of-a-molecule.md` — interactional diagram
+- `engdocs/architecture/session.md`, `controller.md`,
+  `health-patrol.md` — "how agents are kept alive"
+- `engdocs/architecture/nine-concepts.md`, `glossary.md` — primitives
+  reference
+
+### 2.2 Finding 2 — PackV1 / PackV2 contradiction in the tutorial path (P0)
 
 [Tutorial 02 — Agents](../../docs/tutorials/02-agents.md) and
 [Tutorial 03 — Sessions](../../docs/tutorials/03-sessions.md) still use
@@ -78,28 +100,63 @@ teach the PackV2 `agents/<name>/` directory layout. A user following
 tutorials in order will write config that contradicts the migration
 guide they hit next.
 
-Note: project is currently at **v1.1.0**, well past the PackV2 cutover.
+The project is currently at **v1.1.0**, well past the PackV2 cutover.
 PackV1 syntax in tutorials is unambiguous staleness, not a pre-release
 hedge.
 
-### F3 — Gas Town migration guide assumes you still remember Gas Town (P1)
+### 2.3 Finding 3 — Gas Town role recap missing (P1)
 
 [coming-from-gastown.md](../../docs/getting-started/coming-from-gastown.md)
-maps roles ("Deacon watchdog logic → Controller and supervisor")
-without recalling what each Gas Town role actually *did*. A user who
-last touched Gas Town six months ago, or who is evaluating whether to
-migrate at all, cannot recover operational meaning from these mappings
-alone.
+maps Gas Town roles to Gas City equivalents without explaining what
+each role *did* operationally in Gas Town. A user who hasn't touched
+Gas Town recently — or who is *evaluating* whether to migrate at all —
+cannot recover operational meaning from a mapping alone. One paragraph
+per role (mayor, deacon, witness, refinery, polecat, crew, dog)
+describing its function in Gas Town is the minimum.
 
-### F4 — Migration guide points at files that aren't in the docs (P1)
+### 2.4 Finding 4 — Migration Concept Map mixes domains (P1)
 
-The "Fast Ramp Checklist" in `coming-from-gastown.md` references
-`examples/gastown/city.toml` and similar repo paths. These are not
-embedded in the rendered docs, nor linked as downloadable assets, nor
-guaranteed to exist at those paths. Users following the rendered site
-dead-end.
+The Concept Map table in `coming-from-gastown.md` jumbles at least
+four distinct domains into a single mapping:
 
-### F5 — Contributor material leaking into user docs (P1)
+- **Roles** — Mayor, Deacon, Witness, Refinery, Polecat, Crew, Dog
+  (things that *act*).
+- **Mechanisms / behaviors** — "Deacon watchdog logic", "Witness
+  lifecycle logic" (what those things *do*).
+- **Filesystem / state layout** — "Directory tree under `~/gt`"
+  (where state *lives*).
+- **Likely more** — commands, runtime artifacts, config file
+  shapes.
+
+Forcing the reader to disentangle domains while simultaneously
+learning the new system multiplies cognitive load. The fix is
+structural, not editorial: split into separate single-domain tables,
+each presented in a deliberate order (role recap → roles →
+mechanisms → filesystem/state → commands → workflows).
+
+### 2.5 Finding 5 — Workflow mapping missing (P1)
+
+The current migration guide is heavy on nouns (what *was* a mayor,
+what *is* an agent) and light on verbs (how do I *do* X in Gas City
+if I used to do it in Gas Town?). A workflow mapping table — e.g.
+"spin up a worker", "send a task", "inspect what's stuck", "restart a
+stalled agent", "share a config across teams" — is what a real
+migrator reaches for, and it does not exist today.
+
+Distinct from Finding 9 (workflow gaps in the *general* user docs):
+this finding is about *translation* of existing Gas Town habits;
+Finding 9 is about *operation* once on Gas City.
+
+### 2.6 Finding 6 — Migration guide points at files that aren't in the docs (P1)
+
+The "Fast Ramp Checklist" in
+[coming-from-gastown.md](../../docs/getting-started/coming-from-gastown.md)
+references `examples/gastown/city.toml` and similar repo paths. These
+are not embedded in the rendered docs, nor linked as downloadable
+assets, nor guaranteed to exist at those paths. Users following the
+rendered site dead-end.
+
+### 2.7 Finding 7 — Contributor material leaking into user docs (P1)
 
 - [docs/packv2/](../../docs/packv2/) holds 9 files; only
   `migration.mdx` is in the user nav. The rest
@@ -113,7 +170,7 @@ dead-end.
   "organized for external contributors first" — wrong primary
   audience for `docs/`.
 
-### F6 — Reference docs are complete but not navigable (P1)
+### 2.8 Finding 8 — Reference docs are complete but not navigable (P1)
 
 - [reference/config.md](../../docs/reference/config.md): flat
   auto-generated field dump, no grouped "Common Patterns".
@@ -124,7 +181,7 @@ dead-end.
 - [reference/cli.md](../../docs/reference/cli.md): comprehensive but
   flat; no task-oriented entry points.
 
-### F7 — Significant workflow gaps (P1)
+### 2.9 Finding 9 — Significant workflow gaps in operating Gas City (P1)
 
 Things a real user will hit and not find:
 
@@ -135,21 +192,22 @@ Things a real user will hit and not find:
 - Choosing between crew (persistent) and polecats (on-demand).
 - Hooks and external integrations.
 - Multi-machine / Kubernetes deployment.
-- Health monitoring, what `gc doctor [--fix]` actually does.
+- Health monitoring; what `gc doctor [--fix]` actually does.
 
 Source material exists in `engdocs/architecture/` (e.g.
-`session.md`, `health-patrol.md`, `dispatch.md`, `prompt-templates.md`)
-and `engdocs/design/machine-wide-supervisor-v0.md` for scaling. None
-is promoted to user docs.
+`session.md`, `health-patrol.md`, `dispatch.md`,
+`prompt-templates.md`) and
+`engdocs/design/machine-wide-supervisor-v0.md` for scaling. None is
+promoted to user docs.
 
-### F8 — No full end-to-end example (P1)
+### 2.10 Finding 10 — No full end-to-end example (P1)
 
 There is no canonical "minimal complete city" showing `pack.toml` +
 `city.toml` + `agents/<name>/agent.toml` + `prompt.md` + a formula +
 an order, together. Each piece is shown in isolation across different
 tutorials; assembly is left to the reader.
 
-### F9 — Single-runbook troubleshooting catalog (P2)
+### 2.11 Finding 11 — Single-runbook troubleshooting catalog (P2)
 
 [docs/troubleshooting/](../../docs/troubleshooting/) holds one
 runbook (`dolt-bloat-recovery.md`). The Oh-My-Zsh `gc`-alias trap —
@@ -157,16 +215,16 @@ a real blocker for affected users — is in
 [getting-started/troubleshooting.md](../../docs/getting-started/troubleshooting.md)
 but should be a prerequisite check at the top of Quickstart.
 
-### F10 — Staleness signals (P2)
+### 2.12 Finding 12 — Staleness signals (P2)
 
 - [Tutorial 01 line ~26](../../docs/tutorials/01-cities-and-rigs.md)
   shows version `v0.13.4` in sample output. Current tag is
-  **v1.1.0**.
-- [docs/index.mdx](../../docs/index.mdx): "organized for external
-  contributors first" — contradicts the goal of `docs/`.
-- General audit needed for stale concept names (the former Agent
+  **v1.1.0** — eight minor versions behind.
+- [docs/index.mdx](../../docs/index.mdx) opens with "organized for
+  external contributors first" — contradicts the goal of `docs/`.
+- General sweep needed for stale concept names (the former Agent
   Protocol primitive was removed `dd90ac0a` on 2026-03-08; user docs
-  appear clean but worth a sweep).
+  appear clean but worth a check).
 
 ---
 
@@ -184,9 +242,7 @@ PRs stay coherent:
 3. **Every concept page has a runnable example.** No conceptual page
    ships without at least one snippet a user can copy-paste.
 4. **Examples are versioned with the docs.** Reference output uses
-   the current release (v1.1.0 at time of writing). Add a CI check
-   that flags hard-coded version strings drifting from the current
-   tag (or use placeholder substitution at build time).
+   the current release (v1.1.0 at time of writing).
 5. **`engdocs/` stays the source of truth for contributors.** When
    content is promoted, the original stays as a deeper contributor
    reference; the user-doc version links *back* (one-way).
@@ -195,112 +251,137 @@ PRs stay coherent:
 
 ## 4. Work plan (candidate GitHub issues)
 
-This is the first cut. Each item below is sized roughly to be a single
-PR / issue. Grouped by milestone so we can sequence cleanly.
+This is the first cut. Each item below is sized roughly to be a
+single PR / issue. Grouped by milestone so we can sequence cleanly.
+Issue numbers track Finding numbers loosely but not strictly — some
+findings need multiple PRs, some PRs serve multiple findings.
 
-### Milestone 1 — Stop the bleeding (P0, blockers)
+### 4.1 Milestone 1 — Stop the bleeding (P0)
 
-**Issue 1.** *Add a user-facing "Mental Model" page to `docs/`.*
-- New page: `docs/concepts/mental-model.md` (or equivalent in IA).
-- Source: promote and rewrite `engdocs/architecture/nine-concepts.md`
-  and `glossary.md` for a user audience.
-- Update `docs/index.mdx` and `docs/getting-started/coming-from-gastown.md`
-  to link to the new page instead of `engdocs/`.
+**Issue 1 — Architecture overview page + diagrams.** Addresses
+Finding 1(a).
+- New page: `docs/concepts/architecture-overview.md` (path TBD —
+  see open question).
+- Top-down prose: what Gas City is, how the parts hang together,
+  how work flows, how agents are kept alive and communicate.
+- At least two diagrams (Mermaid, so they live in source):
+  structural and interactional. Health/keepalive a strong third.
+- Update `docs/index.mdx` and
+  `docs/getting-started/coming-from-gastown.md` to link to this
+  page instead of `engdocs/`.
 - Add to `docs/docs.json` nav.
 
-**Issue 2.** *Migrate Tutorials 02 and 03 to PackV2 syntax.*
-- Rewrite `agents/<name>/agent.toml` + `prompt.md` flow.
+**Issue 2 — Primitives reference page.** Addresses Finding 1(b).
+Lands in lockstep with Issue 1.
+- New page: `docs/concepts/primitives.md` (path TBD).
+- Promote and rewrite `engdocs/architecture/nine-concepts.md` and
+  `glossary.md` for a user audience.
+- Linked *from* the architecture overview, not the entry point.
+
+**Issue 3 — Migrate Tutorials 02 and 03 to PackV2 syntax.**
+Addresses Finding 2.
+- Rewrite the `agents/<name>/agent.toml` + `prompt.md` flow.
 - Verify all cross-references (Tutorial 04+, guides) stay
   consistent.
-- Move the existing PackV1 examples to a clearly-labeled appendix
-  inside `guides/migrating-to-pack-vnext.md` (or kill if redundant
-  with that guide).
+- Move existing PackV1 examples to a clearly-labeled appendix
+  inside `guides/migrating-to-pack-vnext.md` (or remove if
+  redundant with that guide).
 
-**Issue 3.** *Refresh stale version strings and remove "contributors
-first" framing.*
+**Issue 4 — Refresh stale version strings and "contributors first"
+framing.** Addresses Finding 12.
 - Update Tutorial 01 sample output (and any others) to v1.1.0.
 - Update `docs/index.mdx` opening framing to "user-first".
-- Decide on version-substitution mechanism for future releases
-  (build-time replace vs. linting rule).
+- Sweep for any other stale concept names.
 
-### Milestone 2 — Migration realism (P1)
+### 4.2 Milestone 2 — Migration realism (P1)
 
-**Issue 4.** *Embed or link real example assets from
-`coming-from-gastown.md`.*
+**Issue 5 — Restructure `coming-from-gastown.md`.** Addresses
+Findings 3, 4, 5 in one coherent rewrite of the same file.
+- Add "Gas Town role recap" — one paragraph per role.
+- Split the single Concept Map into domain-scoped tables: roles,
+  mechanisms, filesystem/state, commands (existing), workflows
+  (new).
+- Add the workflow mapping table ("how I used to do X → how I do
+  X now").
+
+**Issue 6 — Embed or link real example assets.** Addresses
+Finding 6.
 - Replace dangling `examples/gastown/city.toml` references with
-  inline TOML blocks **or** downloadable links served by Mintlify.
+  inline TOML blocks **or** downloadable links served by
+  Mintlify.
 - Ensure offline / PDF rendering works.
 
-**Issue 5.** *Add a "Gas Town role recap" section to
-`coming-from-gastown.md`.*
-- One paragraph per Gas Town role (mayor, deacon, witness,
-  refinery, polecat, crew) explaining what it *did*, before the
-  mapping table.
-- Goal: usable as a standalone migration evaluation doc, not a
-  cheat sheet for people who already know.
-
-**Issue 6.** *Publish a "Complete Minimal City" example.*
-- New page under `docs/guides/` (or a top-level
+**Issue 7 — Publish a "Complete Minimal City" example.**
+Addresses Finding 10.
+- New page under `docs/guides/` (or top-level
   `docs/examples/minimal-city.md`).
 - Full tree: `pack.toml`, `city.toml`, `agents/<name>/`, one
   formula, one order — assembled, runnable end-to-end.
 - Link from index, quickstart, and Tutorial 07.
 
-### Milestone 3 — Reference & workflow gaps (P1)
+### 4.3 Milestone 3 — Reference & workflow gaps (P1)
 
-**Issue 7.** *Add "Common Config Patterns" to `reference/config.md`.*
+**Issue 8 — Add "Common Config Patterns" to
+`reference/config.md`.** Addresses Finding 8.
 - Hand-written grouped patterns above the auto-generated field
-  dump: changing beads provider, adding a rig, configuring pools,
-  overriding an agent's provider, etc.
+  dump: changing beads provider, adding a rig, configuring
+  pools, overriding an agent's provider, etc.
 
-**Issue 8.** *Expand `reference/formula.md` with conditions, loops,
-checks.*
-- Working examples of each. Source material:
+**Issue 9 — Expand `reference/formula.md` with conditions, loops,
+checks.** Addresses Finding 8.
+- Working examples of each. Source:
   `engdocs/architecture/formulas.md`,
   `engdocs/design/formula-v2-transient-retries.md`.
 
-**Issue 9.** *Add narrative API guide to `reference/api.md`.*
+**Issue 10 — Narrative API guide in `reference/api.md`.**
+Addresses Finding 8.
 - "How to query your city's state" walkthrough with curl + a tiny
   client snippet. Keep the OpenAPI link.
 
-**Issue 10.** *Add a "Debugging Sessions" guide.*
-- Cover `gc session peek` output, stuck-session detection, restart
+**Issue 11 — "Debugging Sessions" guide.** Addresses Finding 9.
+- `gc session peek` output, stuck-session detection, restart
   flow.
 - Source: `engdocs/architecture/session.md`,
-  `engdocs/contributors/reconciler-debugging.md` (sanitized for
-  users — the trace artifact workflow stays contributor-only).
+  `engdocs/contributors/reconciler-debugging.md` (sanitized — the
+  trace artifact workflow stays contributor-only).
 
-**Issue 11.** *Add a "Choosing crew vs. polecats" guide.*
+**Issue 12 — "Choosing crew vs. polecats" guide.** Addresses
+Finding 9.
 - Decision criteria and config snippets.
 - Source: `engdocs/architecture/session.md`,
   `engdocs/design/agent-pools.md`.
 
-**Issue 12.** *Add a "Writing your first agent prompt" guide.*
+**Issue 13 — "Writing your first agent prompt" guide.** Addresses
+Finding 9.
 - Template variables, GUPP principle in user terms, examples.
 - Source: `engdocs/architecture/prompt-templates.md`.
 
-### Milestone 4 — IA cleanup (P1/P2)
+### 4.4 Milestone 4 — IA cleanup (P1/P2)
 
-**Issue 13.** *Audit and reclassify `docs/packv2/`.*
-- For each of the 8 unlinked files: promote into Guides/Reference
-  with proper nav entry, or move to `engdocs/`.
+**Issue 14 — Audit and reclassify `docs/packv2/`.** Addresses
+Finding 7.
+- For each of the unlinked files: promote into Guides/Reference
+  with a proper nav entry, or move to `engdocs/`.
 - Update `docs/docs.json`.
 
-**Issue 14.** *Rename `docs/internals/` → "How It Works" (or
-similar), and promote `beads-topology.md` into the main IA.*
+**Issue 15 — Rename `docs/internals/` → "How It Works" (or
+similar), promote `beads-topology.md` into the main IA.** Addresses
+Finding 7.
 - Adjust framing from "not required" to operator-relevant.
 
-**Issue 15.** *Move OMZ alias warning to top of Quickstart and
-expand troubleshooting catalog.*
+**Issue 16 — Move OMZ alias warning to top of Quickstart and
+expand troubleshooting catalog.** Addresses Finding 11.
 - New runbooks (initial set): recovering from dolt corruption,
   resetting a rig, debugging order triggers.
 
-### Milestone 5 — Scaling and integrations (P2)
+### 4.5 Milestone 5 — Scaling and integrations (P2)
 
-**Issue 16.** *Add a multi-machine / Kubernetes deployment guide.*
+**Issue 17 — Multi-machine / Kubernetes deployment guide.**
+Addresses Finding 9.
 - Source: `engdocs/design/machine-wide-supervisor-v0.md`.
 
-**Issue 17.** *Document hooks and external integrations.*
+**Issue 18 — Document hooks and external integrations.** Addresses
+Finding 9.
 - Source: `engdocs/architecture/messaging.md`,
   `engdocs/design/external-messaging-fabric.md`.
 
@@ -309,26 +390,20 @@ expand troubleshooting catalog.*
 ## 5. Process
 
 1. Land this design doc as `Proposed`.
-2. Iterate on §4 (issue list) in this file until the work plan is
-   agreed.
+2. Iterate on §2 (findings) and §4 (issue list) in this file until
+   the work plan is agreed.
 3. Cut the issues from §4. Each issue links back here for context.
 4. Flip status to `Accepted` once issues are filed.
 5. Flip individual items in §4 to checkboxes as their issues land.
-6. Flip whole doc to `Implemented` when Milestones 1–3 are done.
+6. Flip the whole doc to `Implemented` when Milestones 1–3 are done.
    Milestones 4–5 may continue independently.
 
 ---
 
 ## 6. Open questions
 
-- Should the "Mental Model" page live under a new `concepts/` section
-  in the nav, or as `getting-started/mental-model.md` so it's
-  encountered earlier?
-- Do we want Mintlify "snippets" / includes for shared TOML
-  examples, so the minimal-city tree and tutorial examples don't
-  drift?
-- Is there a version-substitution mechanism already used in
-  `make check-docs`, or do we need to add one?
-- For Gas Town migration: do we keep `coming-from-gastown.md` as a
-  single long page, or split into "Concept Map" + "Command Cheat
-  Sheet" + "Fast Ramp Checklist"?
+- **IA placement of the architecture overview and primitives
+  reference.** Top-level `docs/concepts/`? Under `getting-started/`
+  so they're encountered before tutorials? Some hybrid (overview
+  in getting-started, primitives in concepts)? Resolving this also
+  determines the final file paths used in Issues 1 and 2.
