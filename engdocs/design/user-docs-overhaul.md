@@ -39,10 +39,12 @@ understand or operate Gas City.
 ## 2. Findings
 
 Each finding is tagged **P0** (blocks user onboarding), **P1** (significant
-friction), or **P2** (polish / longer-term). Numbered for traceability
-into the work plan in §4.
+friction), or **P2** (polish / longer-term). Findings carry a shortcode
+(**F1**, **F2**, …, **F12**) used throughout the rest of this document —
+in particular, work-plan issues in §4 cite the findings they address by
+shortcode.
 
-### 2.1 Finding 1 — No top-down view of how Gas City works (P0)
+### 2.1 F1 — No top-down view of how Gas City works (P0)
 
 `docs/` has no high-level explanation of Gas City as an orchestrator.
 An engineer arriving cold cannot answer "what is this system, how do its
@@ -89,7 +91,7 @@ Relevant engdocs source material to adapt:
 - `engdocs/architecture/nine-concepts.md`, `glossary.md` — primitives
   reference
 
-### 2.2 Finding 2 — PackV1 / PackV2 contradiction in the tutorial path (P0)
+### 2.2 F2 — PackV1 / PackV2 contradiction in the tutorial path (P0)
 
 [Tutorial 02 — Agents](../../docs/tutorials/02-agents.md) and
 [Tutorial 03 — Sessions](../../docs/tutorials/03-sessions.md) still use
@@ -104,7 +106,7 @@ The project is currently at **v1.1.0**, well past the PackV2 cutover.
 PackV1 syntax in tutorials is unambiguous staleness, not a pre-release
 hedge.
 
-### 2.3 Finding 3 — Gas Town role recap missing (P1)
+### 2.3 F3 — Gas Town role recap missing (P1)
 
 [coming-from-gastown.md](../../docs/getting-started/coming-from-gastown.md)
 maps Gas Town roles to Gas City equivalents without explaining what
@@ -114,7 +116,7 @@ cannot recover operational meaning from a mapping alone. One paragraph
 per role (mayor, deacon, witness, refinery, polecat, crew, dog)
 describing its function in Gas Town is the minimum.
 
-### 2.4 Finding 4 — Migration Concept Map mixes domains (P1)
+### 2.4 F4 — Migration Concept Map mixes domains (P1)
 
 The Concept Map table in `coming-from-gastown.md` jumbles at least
 four distinct domains into a single mapping:
@@ -134,7 +136,7 @@ structural, not editorial: split into separate single-domain tables,
 each presented in a deliberate order (role recap → roles →
 mechanisms → filesystem/state → commands → workflows).
 
-### 2.5 Finding 5 — Workflow mapping missing (P1)
+### 2.5 F5 — Workflow mapping missing (P1)
 
 The current migration guide is heavy on nouns (what *was* a mayor,
 what *is* an agent) and light on verbs (how do I *do* X in Gas City
@@ -143,11 +145,11 @@ if I used to do it in Gas Town?). A workflow mapping table — e.g.
 stalled agent", "share a config across teams" — is what a real
 migrator reaches for, and it does not exist today.
 
-Distinct from Finding 9 (workflow gaps in the *general* user docs):
-this finding is about *translation* of existing Gas Town habits;
-Finding 9 is about *operation* once on Gas City.
+Distinct from F9 (workflow gaps in the *general* user docs): F5 is
+about *translation* of existing Gas Town habits; F9 is about
+*operation* once on Gas City.
 
-### 2.6 Finding 6 — Migration guide points at files that aren't in the docs (P1)
+### 2.6 F6 — Migration guide points at files that aren't in the docs (P1)
 
 The "Fast Ramp Checklist" in
 [coming-from-gastown.md](../../docs/getting-started/coming-from-gastown.md)
@@ -156,7 +158,7 @@ are not embedded in the rendered docs, nor linked as downloadable
 assets, nor guaranteed to exist at those paths. Users following the
 rendered site dead-end.
 
-### 2.7 Finding 7 — Contributor material leaking into user docs (P1)
+### 2.7 F7 — Contributor material leaking into user docs (P1)
 
 - [docs/packv2/](../../docs/packv2/) holds 9 files; only
   `migration.mdx` is in the user nav. The rest
@@ -170,7 +172,7 @@ rendered site dead-end.
   "organized for external contributors first" — wrong primary
   audience for `docs/`.
 
-### 2.8 Finding 8 — Reference docs are complete but not navigable (P1)
+### 2.8 F8 — Reference docs are complete but not navigable (P1)
 
 - [reference/config.md](../../docs/reference/config.md): flat
   auto-generated field dump, no grouped "Common Patterns".
@@ -181,7 +183,7 @@ rendered site dead-end.
 - [reference/cli.md](../../docs/reference/cli.md): comprehensive but
   flat; no task-oriented entry points.
 
-### 2.9 Finding 9 — Significant workflow gaps in operating Gas City (P1)
+### 2.9 F9 — Significant workflow gaps in operating Gas City (P1)
 
 Things a real user will hit and not find:
 
@@ -200,14 +202,14 @@ Source material exists in `engdocs/architecture/` (e.g.
 `engdocs/design/machine-wide-supervisor-v0.md` for scaling. None is
 promoted to user docs.
 
-### 2.10 Finding 10 — No full end-to-end example (P1)
+### 2.10 F10 — No full end-to-end example (P1)
 
 There is no canonical "minimal complete city" showing `pack.toml` +
 `city.toml` + `agents/<name>/agent.toml` + `prompt.md` + a formula +
 an order, together. Each piece is shown in isolation across different
 tutorials; assembly is left to the reader.
 
-### 2.11 Finding 11 — Single-runbook troubleshooting catalog (P2)
+### 2.11 F11 — Single-runbook troubleshooting catalog (P2)
 
 [docs/troubleshooting/](../../docs/troubleshooting/) holds one
 runbook (`dolt-bloat-recovery.md`). The Oh-My-Zsh `gc`-alias trap —
@@ -215,7 +217,7 @@ a real blocker for affected users — is in
 [getting-started/troubleshooting.md](../../docs/getting-started/troubleshooting.md)
 but should be a prerequisite check at the top of Quickstart.
 
-### 2.12 Finding 12 — Staleness signals (P2)
+### 2.12 F12 — Staleness signals (P2)
 
 - [Tutorial 01 line ~26](../../docs/tutorials/01-cities-and-rigs.md)
   shows version `v0.13.4` in sample output. Current tag is
@@ -253,13 +255,13 @@ PRs stay coherent:
 
 This is the first cut. Each item below is sized roughly to be a
 single PR / issue. Grouped by milestone so we can sequence cleanly.
-Issue numbers track Finding numbers loosely but not strictly — some
-findings need multiple PRs, some PRs serve multiple findings.
+Each issue cites the finding(s) it addresses by shortcode (F1, F2,
+…); the mapping is not strictly 1:1.
 
 ### 4.1 Milestone 1 — Stop the bleeding (P0)
 
 **Issue 1 — Architecture overview page + diagrams.** Addresses
-Finding 1(a).
+F1(a).
 - New page: `docs/concepts/architecture-overview.md` (path TBD —
   see open question).
 - Top-down prose: what Gas City is, how the parts hang together,
@@ -271,15 +273,15 @@ Finding 1(a).
   page instead of `engdocs/`.
 - Add to `docs/docs.json` nav.
 
-**Issue 2 — Primitives reference page.** Addresses Finding 1(b).
-Lands in lockstep with Issue 1.
+**Issue 2 — Primitives reference page.** Addresses F1(b). Lands in
+lockstep with Issue 1.
 - New page: `docs/concepts/primitives.md` (path TBD).
 - Promote and rewrite `engdocs/architecture/nine-concepts.md` and
   `glossary.md` for a user audience.
 - Linked *from* the architecture overview, not the entry point.
 
 **Issue 3 — Migrate Tutorials 02 and 03 to PackV2 syntax.**
-Addresses Finding 2.
+Addresses F2.
 - Rewrite the `agents/<name>/agent.toml` + `prompt.md` flow.
 - Verify all cross-references (Tutorial 04+, guides) stay
   consistent.
@@ -288,15 +290,15 @@ Addresses Finding 2.
   redundant with that guide).
 
 **Issue 4 — Refresh stale version strings and "contributors first"
-framing.** Addresses Finding 12.
+framing.** Addresses F12.
 - Update Tutorial 01 sample output (and any others) to v1.1.0.
 - Update `docs/index.mdx` opening framing to "user-first".
 - Sweep for any other stale concept names.
 
 ### 4.2 Milestone 2 — Migration realism (P1)
 
-**Issue 5 — Restructure `coming-from-gastown.md`.** Addresses
-Findings 3, 4, 5 in one coherent rewrite of the same file.
+**Issue 5 — Restructure `coming-from-gastown.md`.** Addresses F3,
+F4, F5 in one coherent rewrite of the same file.
 - Add "Gas Town role recap" — one paragraph per role.
 - Split the single Concept Map into domain-scoped tables: roles,
   mechanisms, filesystem/state, commands (existing), workflows
@@ -304,15 +306,14 @@ Findings 3, 4, 5 in one coherent rewrite of the same file.
 - Add the workflow mapping table ("how I used to do X → how I do
   X now").
 
-**Issue 6 — Embed or link real example assets.** Addresses
-Finding 6.
+**Issue 6 — Embed or link real example assets.** Addresses F6.
 - Replace dangling `examples/gastown/city.toml` references with
   inline TOML blocks **or** downloadable links served by
   Mintlify.
 - Ensure offline / PDF rendering works.
 
 **Issue 7 — Publish a "Complete Minimal City" example.**
-Addresses Finding 10.
+Addresses F10.
 - New page under `docs/guides/` (or top-level
   `docs/examples/minimal-city.md`).
 - Full tree: `pack.toml`, `city.toml`, `agents/<name>/`, one
@@ -322,66 +323,64 @@ Addresses Finding 10.
 ### 4.3 Milestone 3 — Reference & workflow gaps (P1)
 
 **Issue 8 — Add "Common Config Patterns" to
-`reference/config.md`.** Addresses Finding 8.
+`reference/config.md`.** Addresses F8.
 - Hand-written grouped patterns above the auto-generated field
   dump: changing beads provider, adding a rig, configuring
   pools, overriding an agent's provider, etc.
 
 **Issue 9 — Expand `reference/formula.md` with conditions, loops,
-checks.** Addresses Finding 8.
+checks.** Addresses F8.
 - Working examples of each. Source:
   `engdocs/architecture/formulas.md`,
   `engdocs/design/formula-v2-transient-retries.md`.
 
 **Issue 10 — Narrative API guide in `reference/api.md`.**
-Addresses Finding 8.
+Addresses F8.
 - "How to query your city's state" walkthrough with curl + a tiny
   client snippet. Keep the OpenAPI link.
 
-**Issue 11 — "Debugging Sessions" guide.** Addresses Finding 9.
+**Issue 11 — "Debugging Sessions" guide.** Addresses F9.
 - `gc session peek` output, stuck-session detection, restart
   flow.
 - Source: `engdocs/architecture/session.md`,
   `engdocs/contributors/reconciler-debugging.md` (sanitized — the
   trace artifact workflow stays contributor-only).
 
-**Issue 12 — "Choosing crew vs. polecats" guide.** Addresses
-Finding 9.
+**Issue 12 — "Choosing crew vs. polecats" guide.** Addresses F9.
 - Decision criteria and config snippets.
 - Source: `engdocs/architecture/session.md`,
   `engdocs/design/agent-pools.md`.
 
 **Issue 13 — "Writing your first agent prompt" guide.** Addresses
-Finding 9.
+F9.
 - Template variables, GUPP principle in user terms, examples.
 - Source: `engdocs/architecture/prompt-templates.md`.
 
 ### 4.4 Milestone 4 — IA cleanup (P1/P2)
 
-**Issue 14 — Audit and reclassify `docs/packv2/`.** Addresses
-Finding 7.
+**Issue 14 — Audit and reclassify `docs/packv2/`.** Addresses F7.
 - For each of the unlinked files: promote into Guides/Reference
   with a proper nav entry, or move to `engdocs/`.
 - Update `docs/docs.json`.
 
 **Issue 15 — Rename `docs/internals/` → "How It Works" (or
 similar), promote `beads-topology.md` into the main IA.** Addresses
-Finding 7.
+F7.
 - Adjust framing from "not required" to operator-relevant.
 
 **Issue 16 — Move OMZ alias warning to top of Quickstart and
-expand troubleshooting catalog.** Addresses Finding 11.
+expand troubleshooting catalog.** Addresses F11.
 - New runbooks (initial set): recovering from dolt corruption,
   resetting a rig, debugging order triggers.
 
 ### 4.5 Milestone 5 — Scaling and integrations (P2)
 
 **Issue 17 — Multi-machine / Kubernetes deployment guide.**
-Addresses Finding 9.
+Addresses F9.
 - Source: `engdocs/design/machine-wide-supervisor-v0.md`.
 
 **Issue 18 — Document hooks and external integrations.** Addresses
-Finding 9.
+F9.
 - Source: `engdocs/architecture/messaging.md`,
   `engdocs/design/external-messaging-fabric.md`.
 
