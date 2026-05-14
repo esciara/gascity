@@ -1,20 +1,55 @@
 direction: right
 
-browser: Browser {shape: person}
-cdn: CDN
-lb: Load Balancer
+browser: Browser {
+  shape: person
+  style.fill: "#a5d8ff"
+  style.stroke: "#1e1e1e"
+}
+cdn: CDN {
+  style.fill: "#fff3bf"
+  style.stroke: "#1e1e1e"
+}
+lb: Load Balancer {
+  style.fill: "#ffd8a8"
+  style.stroke: "#1e1e1e"
+}
 
 apps: App Servers {
-  app1: App Server 1
-  app2: App Server 2
+  style.fill: "#e5dbff"
+  style.stroke: "#8b5cf6"
+  app1: App Server 1 {
+    style.fill: "#d0bfff"
+    style.stroke: "#1e1e1e"
+  }
+  app2: App Server 2 {
+    style.fill: "#d0bfff"
+    style.stroke: "#1e1e1e"
+  }
 }
 
 data: Data Layer {
-  db: Primary DB {shape: cylinder}
-  replica: Read Replica {shape: cylinder}
-  cache: Redis {shape: cylinder}
+  style.fill: "#d3f9d8"
+  style.stroke: "#22c55e"
+  db: Primary DB {
+    shape: cylinder
+    style.fill: "#b2f2bb"
+    style.stroke: "#1e1e1e"
+  }
+  replica: Read Replica {
+    shape: cylinder
+    style.fill: "#c3fae8"
+    style.stroke: "#1e1e1e"
+  }
+  cache: Redis {
+    shape: cylinder
+    style.fill: "#ffc9c9"
+    style.stroke: "#1e1e1e"
+  }
 
-  db -> replica: replication {style.stroke-dash: 4}
+  db -> replica: replication {
+    style.stroke-dash: 4
+    style.stroke: "#22c55e"
+  }
 }
 
 browser -> cdn

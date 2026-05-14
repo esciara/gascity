@@ -25,6 +25,16 @@ flowchart TD
   validate -- success --> dashboard[Dashboard]
   validate -- failure --> error[Show error]
   error -- retry --> creds
+
+  style start fill:#a5d8ff,stroke:#1e1e1e
+  style creds fill:#ffd8a8,stroke:#1e1e1e
+  style validate fill:#fff3bf,stroke:#1e1e1e
+  style dashboard fill:#b2f2bb,stroke:#1e1e1e
+  style error fill:#ffc9c9,stroke:#1e1e1e
+
+  linkStyle 2 stroke:#22c55e
+  linkStyle 3 stroke:#ef4444
+  linkStyle 4 stroke:#757575
 ```
 
 ### D2
@@ -64,6 +74,19 @@ flowchart LR
   app2 --> replica
   app2 --> cache
   db -. replication .-> replica
+
+  style browser fill:#a5d8ff,stroke:#1e1e1e
+  style cdn fill:#fff3bf,stroke:#1e1e1e
+  style lb fill:#ffd8a8,stroke:#1e1e1e
+  style app1 fill:#d0bfff,stroke:#1e1e1e
+  style app2 fill:#d0bfff,stroke:#1e1e1e
+  style db fill:#b2f2bb,stroke:#1e1e1e
+  style replica fill:#c3fae8,stroke:#1e1e1e
+  style cache fill:#ffc9c9,stroke:#1e1e1e
+  style apps fill:#e5dbff,stroke:#8b5cf6
+  style data fill:#d3f9d8,stroke:#22c55e
+
+  linkStyle 8 stroke:#22c55e
 ```
 
 ### D2
@@ -86,10 +109,18 @@ Tests how each tool handles sequence/interaction diagrams. Mermaid and D2 both s
 
 ```mermaid
 sequenceDiagram
-  participant U as User
-  participant C as Client App
-  participant A as Auth Server
-  participant R as Resource Server
+  box rgb(165, 216, 255) User
+    participant U as User
+  end
+  box rgb(208, 191, 255) Client App
+    participant C as Client App
+  end
+  box rgb(255, 216, 168) Auth Server
+    participant A as Auth Server
+  end
+  box rgb(178, 242, 187) Resource Server
+    participant R as Resource Server
+  end
   U->>C: 1. Click "Log in"
   C->>A: 2. Redirect to /authorize
   A->>U: 3. Show login page
