@@ -1,0 +1,13 @@
+direction: down
+
+start: Start {shape: oval}
+creds: Enter credentials
+validate: Validate? {shape: diamond}
+dashboard: Dashboard
+error: Show error
+
+start -> creds
+creds -> validate
+validate -> dashboard: success
+validate -> error: failure
+error -> creds: retry

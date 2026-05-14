@@ -1,0 +1,30 @@
+direction: right
+
+browser: Browser {shape: person}
+cdn: CDN
+lb: Load Balancer
+
+apps: App Servers {
+  app1: App Server 1
+  app2: App Server 2
+}
+
+data: Data Layer {
+  db: Primary DB {shape: cylinder}
+  replica: Read Replica {shape: cylinder}
+  cache: Redis {shape: cylinder}
+
+  db -> replica: replication {style.stroke-dash: 4}
+}
+
+browser -> cdn
+cdn -> lb
+lb -> apps.app1
+lb -> apps.app2
+
+apps.app1 -> data.db: writes
+apps.app2 -> data.db: writes
+apps.app1 -> data.replica: reads
+apps.app2 -> data.replica: reads
+apps.app1 -> data.cache
+apps.app2 -> data.cache
