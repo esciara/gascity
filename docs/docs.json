@@ -125,6 +125,12 @@
           "internals/index",
           "internals/beads-topology"
         ]
+      },
+      {
+        "group": "Diagrams Comparison",
+        "pages": [
+          "diagrams-comparison/index"
+        ]
       }
     ]
   }

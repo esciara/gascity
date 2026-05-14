@@ -21,7 +21,7 @@ LDFLAGS := -X main.version=$(VERSION) \
            -X main.commit=$(COMMIT) \
            -X main.date=$(BUILD_TIME)
 
-.PHONY: build check check-all check-bd check-docker check-docs check-dolt check-version-tag lint lint-full lint-new lint-changed fmt-check fmt vet test test-fast-parallel test-fsys-darwin-compile test-cmd-gc-process test-cmd-gc-process-shard test-cmd-gc-process-parallel test-worker-core test-worker-core-phase2 test-worker-core-phase2-real-transport setup-worker-inference test-worker-inference test-worker-inference-phase3 test-acceptance test-acceptance-b test-acceptance-c test-acceptance-all test-tutorial-goldens test-tutorial-regression test-tutorial test-integration test-integration-shards test-integration-shards-parallel test-integration-shards-cover test-integration-packages test-integration-packages-cover test-integration-review-formulas test-integration-review-formulas-cover test-integration-review-formulas-basic test-integration-review-formulas-basic-cover test-integration-review-formulas-retries test-integration-review-formulas-retries-cover test-integration-review-formulas-recovery test-integration-review-formulas-recovery-cover test-integration-bdstore test-integration-bdstore-cover test-integration-rest test-integration-rest-cover test-integration-rest-smoke test-integration-rest-smoke-cover test-integration-rest-full test-integration-rest-full-cover test-local-full-parallel test-mcp-mail test-docker test-k8s test-cover cover install install-tools install-buildx setup clean generate check-schema docker-base docker-agent docker-controller docs-dev dashboard-smoke
+.PHONY: build check check-all check-bd check-docker check-docs check-dolt check-version-tag lint lint-full lint-new lint-changed fmt-check fmt vet test test-fast-parallel test-fsys-darwin-compile test-cmd-gc-process test-cmd-gc-process-shard test-cmd-gc-process-parallel test-worker-core test-worker-core-phase2 test-worker-core-phase2-real-transport setup-worker-inference test-worker-inference test-worker-inference-phase3 test-acceptance test-acceptance-b test-acceptance-c test-acceptance-all test-tutorial-goldens test-tutorial-regression test-tutorial test-integration test-integration-shards test-integration-shards-parallel test-integration-shards-cover test-integration-packages test-integration-packages-cover test-integration-review-formulas test-integration-review-formulas-cover test-integration-review-formulas-basic test-integration-review-formulas-basic-cover test-integration-review-formulas-retries test-integration-review-formulas-retries-cover test-integration-review-formulas-recovery test-integration-review-formulas-recovery-cover test-integration-bdstore test-integration-bdstore-cover test-integration-rest test-integration-rest-cover test-integration-rest-smoke test-integration-rest-smoke-cover test-integration-rest-full test-integration-rest-full-cover test-local-full-parallel test-mcp-mail test-docker test-k8s test-cover cover install install-tools install-buildx setup clean generate check-schema docker-base docker-agent docker-controller docs-dev diagrams diagrams-d2 diagrams-excalidraw dashboard-smoke
 
 ## build: compile gc binary with version metadata
 build:
@@ -529,6 +529,49 @@ setup: install-tools
 ## docs-dev: run the Mintlify docs locally
 docs-dev:
 	./mint.sh dev
+
+## diagrams-d2: render docs/diagrams-comparison/d2/*.d2 to d2-rendered/*.svg (idempotent)
+diagrams-d2:
+	@set -e; \
+	src_dir=docs/diagrams-comparison/d2; \
+	out_dir=docs/diagrams-comparison/d2-rendered; \
+	mkdir -p "$$out_dir"; \
+	shopt -s nullglob 2>/dev/null || true; \
+	rendered=0; \
+	for f in "$$src_dir"/*.d2; do \
+		[ -e "$$f" ] || continue; \
+		base=$$(basename "$$f" .d2); \
+		out="$$out_dir/$$base.svg"; \
+		if [ ! -e "$$out" ] || [ "$$f" -nt "$$out" ]; then \
+			echo "d2  -> $$out"; \
+			d2 --layout=elk "$$f" "$$out"; \
+			rendered=$$((rendered+1)); \
+		fi; \
+	done; \
+	echo "d2: rendered $$rendered file(s)"
+
+## diagrams-excalidraw: render docs/diagrams-comparison/excalidraw/*.excalidraw to excalidraw-rendered/*.svg (idempotent)
+diagrams-excalidraw:
+	@set -e; \
+	src_dir=docs/diagrams-comparison/excalidraw; \
+	out_dir=docs/diagrams-comparison/excalidraw-rendered; \
+	mkdir -p "$$out_dir"; \
+	shopt -s nullglob 2>/dev/null || true; \
+	rendered=0; \
+	for f in "$$src_dir"/*.excalidraw; do \
+		[ -e "$$f" ] || continue; \
+		base=$$(basename "$$f" .excalidraw); \
+		out="$$out_dir/$$base.svg"; \
+		if [ ! -e "$$out" ] || [ "$$f" -nt "$$out" ]; then \
+			echo "excalidraw -> $$out"; \
+			npx -y @swiftlysingh/excalidraw-cli convert "$$f" --format svg --output "$$out"; \
+			rendered=$$((rendered+1)); \
+		fi; \
+	done; \
+	echo "excalidraw: rendered $$rendered file(s)"
+
+## diagrams: render all comparison diagrams (D2 + Excalidraw)
+diagrams: diagrams-d2 diagrams-excalidraw
 
 ## dashboard-build: regenerate SPA types + compile the dist bundle
 dashboard-build:
