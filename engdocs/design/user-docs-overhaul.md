@@ -262,8 +262,7 @@ Each issue cites the finding(s) it addresses by shortcode (F1, F2,
 
 **Issue 1 — Architecture overview page + diagrams.** Addresses
 F1(a).
-- New page: `docs/concepts/architecture-overview.md` (path TBD —
-  see open question).
+- New page: `docs/concepts/architecture-overview.md`.
 - Top-down prose: what Gas City is, how the parts hang together,
   how work flows, how agents are kept alive and communicate.
 - At least two diagrams (Mermaid, so they live in source):
@@ -275,7 +274,7 @@ F1(a).
 
 **Issue 2 — Primitives reference page.** Addresses F1(b). Lands in
 lockstep with Issue 1.
-- New page: `docs/concepts/primitives.md` (path TBD).
+- New page: `docs/concepts/primitives.md`.
 - Promote and rewrite `engdocs/architecture/nine-concepts.md` and
   `glossary.md` for a user audience.
 - Linked *from* the architecture overview, not the entry point.
@@ -402,7 +401,9 @@ F9.
 ## 6. Open questions
 
 - **IA placement of the architecture overview and primitives
-  reference.** Top-level `docs/concepts/`? Under `getting-started/`
+  reference.** ~~Top-level `docs/concepts/`? Under `getting-started/`
   so they're encountered before tutorials? Some hybrid (overview
-  in getting-started, primitives in concepts)? Resolving this also
-  determines the final file paths used in Issues 1 and 2.
+  in getting-started, primitives in concepts)?~~ **Resolved: both
+  pages land under top-level `docs/concepts/`.** Final paths:
+  `docs/concepts/architecture-overview.md` (Issue 1) and
+  `docs/concepts/primitives.md` (Issue 2).
