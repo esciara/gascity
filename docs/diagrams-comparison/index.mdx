@@ -1,12 +1,12 @@
 ---
 title: Diagrams Comparison
-description: Side-by-side comparison of the same diagrams rendered with Mermaid (ELK), D2, and Excalidraw.
+description: Side-by-side comparison of the same diagrams rendered with Mermaid, D2, and Excalidraw.
 ---
 
 This page renders the same four diagrams in three different tools so they can be compared visually.
 
-- **Mermaid** is rendered inline by Mintlify's `mermaid` code block. Flowcharts use the ELK renderer via `%%{init: {'flowchart': {'defaultRenderer': 'elk'}}}%%`. The ELK directive does not apply to sequence or ER diagrams, so it is omitted for C and D.
-- **D2** sources live under `docs/diagrams-comparison/d2/` and are compiled to SVG with `make diagrams-d2` (uses `d2 --layout=elk`). Compiled SVGs are committed under `docs/diagrams-comparison/d2-rendered/`.
+- **Mermaid** is rendered inline by Mintlify's `mermaid` code block.
+- **D2** sources live under `docs/diagrams-comparison/d2/` and are compiled to SVG with `make diagrams-d2`. Compiled SVGs are committed under `docs/diagrams-comparison/d2-rendered/`.
 - **Excalidraw** sources live under `docs/diagrams-comparison/excalidraw/` and are rendered to SVG with `make diagrams-excalidraw` (uses `@swiftlysingh/excalidraw-cli`). Compiled SVGs are committed under `docs/diagrams-comparison/excalidraw-rendered/`.
 
 Run `make diagrams` to (re-)render everything.
@@ -18,7 +18,6 @@ Tests basic shapes, branching, and labels.
 ### Mermaid
 
 ```mermaid
-%%{init: {'flowchart': {'defaultRenderer': 'elk'}}}%%
 flowchart TD
   start([Start]) --> creds[Enter credentials]
   creds --> validate{Validate?}
@@ -52,7 +51,6 @@ Tests containers/grouping and dense layouts: browser → CDN → load balancer �
 ### Mermaid
 
 ```mermaid
-%%{init: {'flowchart': {'defaultRenderer': 'elk'}}}%%
 flowchart LR
   browser([Browser]) --> cdn[CDN]
   cdn --> lb[Load Balancer]
@@ -83,9 +81,6 @@ flowchart LR
   style db fill:#b2f2bb,stroke:#1e1e1e
   style replica fill:#c3fae8,stroke:#1e1e1e
   style cache fill:#ffc9c9,stroke:#1e1e1e
-  style apps fill:#e5dbff,stroke:#8b5cf6
-  style data fill:#d3f9d8,stroke:#22c55e
-
   linkStyle 8 stroke:#22c55e
 ```
 
@@ -187,7 +182,7 @@ Numbers for **diagram B** (architecture diagram — the densest of the four):
 
 | Tool | Source lines (B) | Build step? | Rendered output size (B) |
 | --- | --- | --- | --- |
-| Mermaid (ELK) | 22 (inline in this .mdx) | No — rendered live by Mintlify | n/a (inline SVG, no committed file) |
+| Mermaid | 22 (inline in this .mdx) | No — rendered live by Mintlify | n/a (inline SVG, no committed file) |
 | D2 | 30 | Yes — `make diagrams-d2` | 31 KB SVG |
 | D2 (sketch mode) | 36 | Yes — `make diagrams-d2` | 126 KB SVG |
 | Excalidraw | 478 | Yes — `make diagrams-excalidraw` | 28 KB SVG |
