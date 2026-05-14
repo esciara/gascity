@@ -15,7 +15,13 @@
       "strokeColor": "#1e1e1e",
       "strokeWidth": 2,
       "roundness": null,
-      "boundElements": [{"type": "text", "id": "start_t"}]
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "start_t"
+        }
+      ],
+      "roughness": 0
     },
     {
       "type": "text",
@@ -27,7 +33,7 @@
       "text": "Start",
       "originalText": "Start",
       "fontSize": 20,
-      "fontFamily": 1,
+      "fontFamily": 2,
       "textAlign": "center",
       "verticalAlign": "middle",
       "containerId": "start",
@@ -44,8 +50,16 @@
       "fillStyle": "solid",
       "strokeColor": "#1e1e1e",
       "strokeWidth": 2,
-      "roundness": {"type": 3},
-      "boundElements": [{"type": "text", "id": "creds_t"}]
+      "roundness": {
+        "type": 3
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "creds_t"
+        }
+      ],
+      "roughness": 0
     },
     {
       "type": "text",
@@ -57,7 +71,7 @@
       "text": "Enter credentials",
       "originalText": "Enter credentials",
       "fontSize": 20,
-      "fontFamily": 1,
+      "fontFamily": 2,
       "textAlign": "center",
       "verticalAlign": "middle",
       "containerId": "creds",
@@ -75,7 +89,13 @@
       "strokeColor": "#1e1e1e",
       "strokeWidth": 2,
       "roundness": null,
-      "boundElements": [{"type": "text", "id": "validate_t"}]
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "validate_t"
+        }
+      ],
+      "roughness": 0
     },
     {
       "type": "text",
@@ -87,7 +107,7 @@
       "text": "Validate?",
       "originalText": "Validate?",
       "fontSize": 20,
-      "fontFamily": 1,
+      "fontFamily": 2,
       "textAlign": "center",
       "verticalAlign": "middle",
       "containerId": "validate",
@@ -104,8 +124,16 @@
       "fillStyle": "solid",
       "strokeColor": "#1e1e1e",
       "strokeWidth": 2,
-      "roundness": {"type": 3},
-      "boundElements": [{"type": "text", "id": "dashboard_t"}]
+      "roundness": {
+        "type": 3
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "dashboard_t"
+        }
+      ],
+      "roughness": 0
     },
     {
       "type": "text",
@@ -117,7 +145,7 @@
       "text": "Dashboard",
       "originalText": "Dashboard",
       "fontSize": 20,
-      "fontFamily": 1,
+      "fontFamily": 2,
       "textAlign": "center",
       "verticalAlign": "middle",
       "containerId": "dashboard",
@@ -134,8 +162,16 @@
       "fillStyle": "solid",
       "strokeColor": "#1e1e1e",
       "strokeWidth": 2,
-      "roundness": {"type": 3},
-      "boundElements": [{"type": "text", "id": "error_t"}]
+      "roundness": {
+        "type": 3
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "error_t"
+        }
+      ],
+      "roughness": 0
     },
     {
       "type": "text",
@@ -147,7 +183,7 @@
       "text": "Show error",
       "originalText": "Show error",
       "fontSize": 20,
-      "fontFamily": 1,
+      "fontFamily": 2,
       "textAlign": "center",
       "verticalAlign": "middle",
       "containerId": "error",
@@ -160,12 +196,34 @@
       "y": 110,
       "width": 0,
       "height": 60,
-      "points": [[0, 0], [0, 60]],
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          60
+        ]
+      ],
       "strokeColor": "#1e1e1e",
       "strokeWidth": 2,
       "endArrowhead": "arrow",
-      "startBinding": {"elementId": "start", "fixedPoint": [0.5, 1]},
-      "endBinding": {"elementId": "creds", "fixedPoint": [0.5, 0]}
+      "startBinding": {
+        "elementId": "start",
+        "fixedPoint": [
+          0.5,
+          1
+        ]
+      },
+      "endBinding": {
+        "elementId": "creds",
+        "fixedPoint": [
+          0.5,
+          0
+        ]
+      },
+      "roughness": 0
     },
     {
       "type": "arrow",
@@ -174,12 +232,34 @@
       "y": 230,
       "width": 0,
       "height": 30,
-      "points": [[0, 0], [0, 30]],
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          30
+        ]
+      ],
       "strokeColor": "#1e1e1e",
       "strokeWidth": 2,
       "endArrowhead": "arrow",
-      "startBinding": {"elementId": "creds", "fixedPoint": [0.5, 1]},
-      "endBinding": {"elementId": "validate", "fixedPoint": [0.5, 0]}
+      "startBinding": {
+        "elementId": "creds",
+        "fixedPoint": [
+          0.5,
+          1
+        ]
+      },
+      "endBinding": {
+        "elementId": "validate",
+        "fixedPoint": [
+          0.5,
+          0
+        ]
+      },
+      "roughness": 0
     },
     {
       "type": "arrow",
@@ -188,13 +268,37 @@
       "y": 350,
       "width": -110,
       "height": 110,
-      "points": [[0, 0], [-110, 110]],
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          -110,
+          110
+        ]
+      ],
       "strokeColor": "#22c55e",
       "strokeWidth": 2,
       "endArrowhead": "arrow",
-      "startBinding": {"elementId": "validate", "fixedPoint": [0.1, 0.75]},
-      "endBinding": {"elementId": "dashboard", "fixedPoint": [0.5, 0]},
-      "label": {"text": "success"}
+      "startBinding": {
+        "elementId": "validate",
+        "fixedPoint": [
+          0.1,
+          0.75
+        ]
+      },
+      "endBinding": {
+        "elementId": "dashboard",
+        "fixedPoint": [
+          0.5,
+          0
+        ]
+      },
+      "label": {
+        "text": "success"
+      },
+      "roughness": 0
     },
     {
       "type": "text",
@@ -206,7 +310,7 @@
       "text": "success",
       "originalText": "success",
       "fontSize": 16,
-      "fontFamily": 1,
+      "fontFamily": 2,
       "textAlign": "center",
       "verticalAlign": "middle",
       "strokeColor": "#22c55e",
@@ -219,12 +323,34 @@
       "y": 350,
       "width": 110,
       "height": 110,
-      "points": [[0, 0], [110, 110]],
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          110,
+          110
+        ]
+      ],
       "strokeColor": "#ef4444",
       "strokeWidth": 2,
       "endArrowhead": "arrow",
-      "startBinding": {"elementId": "validate", "fixedPoint": [0.9, 0.75]},
-      "endBinding": {"elementId": "error", "fixedPoint": [0.5, 0]}
+      "startBinding": {
+        "elementId": "validate",
+        "fixedPoint": [
+          0.9,
+          0.75
+        ]
+      },
+      "endBinding": {
+        "elementId": "error",
+        "fixedPoint": [
+          0.5,
+          0
+        ]
+      },
+      "roughness": 0
     },
     {
       "type": "text",
@@ -236,7 +362,7 @@
       "text": "failure",
       "originalText": "failure",
       "fontSize": 16,
-      "fontFamily": 1,
+      "fontFamily": 2,
       "textAlign": "center",
       "verticalAlign": "middle",
       "strokeColor": "#ef4444",
@@ -249,13 +375,43 @@
       "y": 490,
       "width": 90,
       "height": -290,
-      "points": [[0, 0], [50, 0], [50, -290], [-160, -290]],
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          50,
+          0
+        ],
+        [
+          50,
+          -290
+        ],
+        [
+          -160,
+          -290
+        ]
+      ],
       "strokeColor": "#757575",
       "strokeWidth": 2,
       "strokeStyle": "dashed",
       "endArrowhead": "arrow",
-      "startBinding": {"elementId": "error", "fixedPoint": [1, 0.5]},
-      "endBinding": {"elementId": "creds", "fixedPoint": [1, 0.5]}
+      "startBinding": {
+        "elementId": "error",
+        "fixedPoint": [
+          1,
+          0.5
+        ]
+      },
+      "endBinding": {
+        "elementId": "creds",
+        "fixedPoint": [
+          1,
+          0.5
+        ]
+      },
+      "roughness": 0
     },
     {
       "type": "text",
@@ -267,7 +423,7 @@
       "text": "retry",
       "originalText": "retry",
       "fontSize": 16,
-      "fontFamily": 1,
+      "fontFamily": 2,
       "textAlign": "center",
       "verticalAlign": "middle",
       "strokeColor": "#757575",

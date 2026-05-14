@@ -14,8 +14,16 @@
       "fillStyle": "solid",
       "strokeColor": "#4a9eed",
       "strokeWidth": 2,
-      "roundness": {"type": 3},
-      "boundElements": [{"type": "text", "id": "h_user_t"}]
+      "roundness": {
+        "type": 3
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "h_user_t"
+        }
+      ],
+      "roughness": 0
     },
     {
       "type": "text",
@@ -27,7 +35,7 @@
       "text": "User",
       "originalText": "User",
       "fontSize": 16,
-      "fontFamily": 1,
+      "fontFamily": 2,
       "textAlign": "center",
       "verticalAlign": "middle",
       "containerId": "h_user",
@@ -44,8 +52,16 @@
       "fillStyle": "solid",
       "strokeColor": "#8b5cf6",
       "strokeWidth": 2,
-      "roundness": {"type": 3},
-      "boundElements": [{"type": "text", "id": "h_client_t"}]
+      "roundness": {
+        "type": 3
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "h_client_t"
+        }
+      ],
+      "roughness": 0
     },
     {
       "type": "text",
@@ -57,7 +73,7 @@
       "text": "Client App",
       "originalText": "Client App",
       "fontSize": 16,
-      "fontFamily": 1,
+      "fontFamily": 2,
       "textAlign": "center",
       "verticalAlign": "middle",
       "containerId": "h_client",
@@ -74,8 +90,16 @@
       "fillStyle": "solid",
       "strokeColor": "#f59e0b",
       "strokeWidth": 2,
-      "roundness": {"type": 3},
-      "boundElements": [{"type": "text", "id": "h_auth_t"}]
+      "roundness": {
+        "type": 3
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "h_auth_t"
+        }
+      ],
+      "roughness": 0
     },
     {
       "type": "text",
@@ -87,7 +111,7 @@
       "text": "Auth Server",
       "originalText": "Auth Server",
       "fontSize": 16,
-      "fontFamily": 1,
+      "fontFamily": 2,
       "textAlign": "center",
       "verticalAlign": "middle",
       "containerId": "h_auth",
@@ -104,8 +128,16 @@
       "fillStyle": "solid",
       "strokeColor": "#22c55e",
       "strokeWidth": 2,
-      "roundness": {"type": 3},
-      "boundElements": [{"type": "text", "id": "h_res_t"}]
+      "roundness": {
+        "type": 3
+      },
+      "boundElements": [
+        {
+          "type": "text",
+          "id": "h_res_t"
+        }
+      ],
+      "roughness": 0
     },
     {
       "type": "text",
@@ -117,7 +149,7 @@
       "text": "Resource Server",
       "originalText": "Resource Server",
       "fontSize": 16,
-      "fontFamily": 1,
+      "fontFamily": 2,
       "textAlign": "center",
       "verticalAlign": "middle",
       "containerId": "h_res",
@@ -130,10 +162,20 @@
       "y": 70,
       "width": 0,
       "height": 530,
-      "points": [[0, 0], [0, 530]],
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          530
+        ]
+      ],
       "strokeColor": "#b0b0b0",
       "strokeWidth": 1,
-      "strokeStyle": "dashed"
+      "strokeStyle": "dashed",
+      "roughness": 0
     },
     {
       "type": "line",
@@ -142,10 +184,20 @@
       "y": 70,
       "width": 0,
       "height": 530,
-      "points": [[0, 0], [0, 530]],
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          530
+        ]
+      ],
       "strokeColor": "#b0b0b0",
       "strokeWidth": 1,
-      "strokeStyle": "dashed"
+      "strokeStyle": "dashed",
+      "roughness": 0
     },
     {
       "type": "line",
@@ -154,10 +206,20 @@
       "y": 70,
       "width": 0,
       "height": 530,
-      "points": [[0, 0], [0, 530]],
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          530
+        ]
+      ],
       "strokeColor": "#b0b0b0",
       "strokeWidth": 1,
-      "strokeStyle": "dashed"
+      "strokeStyle": "dashed",
+      "roughness": 0
     },
     {
       "type": "line",
@@ -166,10 +228,20 @@
       "y": 70,
       "width": 0,
       "height": 530,
-      "points": [[0, 0], [0, 530]],
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          530
+        ]
+      ],
       "strokeColor": "#b0b0b0",
       "strokeWidth": 1,
-      "strokeStyle": "dashed"
+      "strokeStyle": "dashed",
+      "roughness": 0
     },
     {
       "type": "text",
@@ -181,7 +253,7 @@
       "text": "1. Click \"Log in\"",
       "originalText": "1. Click \"Log in\"",
       "fontSize": 14,
-      "fontFamily": 1,
+      "fontFamily": 2,
       "strokeColor": "#1e1e1e",
       "lineHeight": 1.25
     },
@@ -192,10 +264,20 @@
       "y": 125,
       "width": 190,
       "height": 0,
-      "points": [[0, 0], [190, 0]],
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          190,
+          0
+        ]
+      ],
       "strokeColor": "#1e1e1e",
       "strokeWidth": 2,
-      "endArrowhead": "arrow"
+      "endArrowhead": "arrow",
+      "roughness": 0
     },
     {
       "type": "text",
@@ -207,7 +289,7 @@
       "text": "2. Redirect to /authorize",
       "originalText": "2. Redirect to /authorize",
       "fontSize": 14,
-      "fontFamily": 1,
+      "fontFamily": 2,
       "strokeColor": "#1e1e1e",
       "lineHeight": 1.25
     },
@@ -218,10 +300,20 @@
       "y": 175,
       "width": 190,
       "height": 0,
-      "points": [[0, 0], [190, 0]],
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          190,
+          0
+        ]
+      ],
       "strokeColor": "#1e1e1e",
       "strokeWidth": 2,
-      "endArrowhead": "arrow"
+      "endArrowhead": "arrow",
+      "roughness": 0
     },
     {
       "type": "text",
@@ -233,7 +325,7 @@
       "text": "3. Show login page",
       "originalText": "3. Show login page",
       "fontSize": 14,
-      "fontFamily": 1,
+      "fontFamily": 2,
       "strokeColor": "#1e1e1e",
       "lineHeight": 1.25
     },
@@ -244,10 +336,20 @@
       "y": 225,
       "width": -380,
       "height": 0,
-      "points": [[0, 0], [-380, 0]],
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          -380,
+          0
+        ]
+      ],
       "strokeColor": "#1e1e1e",
       "strokeWidth": 2,
-      "endArrowhead": "arrow"
+      "endArrowhead": "arrow",
+      "roughness": 0
     },
     {
       "type": "text",
@@ -259,7 +361,7 @@
       "text": "4. Submit credentials + consent",
       "originalText": "4. Submit credentials + consent",
       "fontSize": 14,
-      "fontFamily": 1,
+      "fontFamily": 2,
       "strokeColor": "#1e1e1e",
       "lineHeight": 1.25
     },
@@ -270,10 +372,20 @@
       "y": 275,
       "width": 380,
       "height": 0,
-      "points": [[0, 0], [380, 0]],
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          380,
+          0
+        ]
+      ],
       "strokeColor": "#1e1e1e",
       "strokeWidth": 2,
-      "endArrowhead": "arrow"
+      "endArrowhead": "arrow",
+      "roughness": 0
     },
     {
       "type": "text",
@@ -285,7 +397,7 @@
       "text": "5. Redirect with auth code",
       "originalText": "5. Redirect with auth code",
       "fontSize": 14,
-      "fontFamily": 1,
+      "fontFamily": 2,
       "strokeColor": "#1e1e1e",
       "lineHeight": 1.25
     },
@@ -296,10 +408,20 @@
       "y": 325,
       "width": -190,
       "height": 0,
-      "points": [[0, 0], [-190, 0]],
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          -190,
+          0
+        ]
+      ],
       "strokeColor": "#1e1e1e",
       "strokeWidth": 2,
-      "endArrowhead": "arrow"
+      "endArrowhead": "arrow",
+      "roughness": 0
     },
     {
       "type": "text",
@@ -311,7 +433,7 @@
       "text": "6. POST /token (code + secret)",
       "originalText": "6. POST /token (code + secret)",
       "fontSize": 14,
-      "fontFamily": 1,
+      "fontFamily": 2,
       "strokeColor": "#1e1e1e",
       "lineHeight": 1.25
     },
@@ -322,10 +444,20 @@
       "y": 375,
       "width": 190,
       "height": 0,
-      "points": [[0, 0], [190, 0]],
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          190,
+          0
+        ]
+      ],
       "strokeColor": "#1e1e1e",
       "strokeWidth": 2,
-      "endArrowhead": "arrow"
+      "endArrowhead": "arrow",
+      "roughness": 0
     },
     {
       "type": "text",
@@ -337,7 +469,7 @@
       "text": "7. Access token (+ refresh)",
       "originalText": "7. Access token (+ refresh)",
       "fontSize": 14,
-      "fontFamily": 1,
+      "fontFamily": 2,
       "strokeColor": "#1e1e1e",
       "lineHeight": 1.25
     },
@@ -348,10 +480,20 @@
       "y": 425,
       "width": -190,
       "height": 0,
-      "points": [[0, 0], [-190, 0]],
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          -190,
+          0
+        ]
+      ],
       "strokeColor": "#22c55e",
       "strokeWidth": 2,
-      "endArrowhead": "arrow"
+      "endArrowhead": "arrow",
+      "roughness": 0
     },
     {
       "type": "text",
@@ -363,7 +505,7 @@
       "text": "8. GET /api with token",
       "originalText": "8. GET /api with token",
       "fontSize": 14,
-      "fontFamily": 1,
+      "fontFamily": 2,
       "strokeColor": "#1e1e1e",
       "lineHeight": 1.25
     },
@@ -374,10 +516,20 @@
       "y": 475,
       "width": 390,
       "height": 0,
-      "points": [[0, 0], [390, 0]],
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          390,
+          0
+        ]
+      ],
       "strokeColor": "#1e1e1e",
       "strokeWidth": 2,
-      "endArrowhead": "arrow"
+      "endArrowhead": "arrow",
+      "roughness": 0
     },
     {
       "type": "text",
@@ -389,7 +541,7 @@
       "text": "9. Return protected resource",
       "originalText": "9. Return protected resource",
       "fontSize": 14,
-      "fontFamily": 1,
+      "fontFamily": 2,
       "strokeColor": "#1e1e1e",
       "lineHeight": 1.25
     },
@@ -400,10 +552,20 @@
       "y": 525,
       "width": -390,
       "height": 0,
-      "points": [[0, 0], [-390, 0]],
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          -390,
+          0
+        ]
+      ],
       "strokeColor": "#22c55e",
       "strokeWidth": 2,
-      "endArrowhead": "arrow"
+      "endArrowhead": "arrow",
+      "roughness": 0
     }
   ],
   "appState": {
