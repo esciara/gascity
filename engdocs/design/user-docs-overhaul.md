@@ -91,6 +91,13 @@ Relevant engdocs source material to adapt:
 - `engdocs/architecture/nine-concepts.md`, `glossary.md` — primitives
   reference
 
+Existing published asset to cross-reference from the overview:
+
+- [`docs/tutorials/06-beads#bead-lifecycle`](../../docs/tutorials/06-beads.md#bead-lifecycle) —
+  already shows how a unit of work moves through states; link as
+  "dig deeper" from the interactional diagram section rather than
+  duplicating the content.
+
 ### 2.2 F2 — PackV1 / PackV2 contradiction in the tutorial path (P0)
 
 [Tutorial 02 — Agents](../../docs/tutorials/02-agents.md) and
