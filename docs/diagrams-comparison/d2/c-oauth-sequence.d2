@@ -1,0 +1,16 @@
+shape: sequence_diagram
+
+user: User
+client: Client App
+auth: Auth Server
+resource: Resource Server
+
+user -> client: 1. Click "Log in"
+client -> auth: 2. Redirect to /authorize
+auth -> user: 3. Show login page
+user -> auth: 4. Submit credentials + consent
+auth -> client: 5. Redirect with auth code
+client -> auth: 6. POST /token (code + client secret)
+auth -> client: 7. Access token (+ refresh token)
+client -> resource: 8. GET /api with access token
+resource -> client: 9. Return protected resource

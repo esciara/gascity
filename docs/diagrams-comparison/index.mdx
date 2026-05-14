@@ -5,7 +5,7 @@ description: Side-by-side comparison of the same diagrams rendered with Mermaid 
 
 This page renders the same four diagrams in three different tools so they can be compared visually.
 
-- **Mermaid** is rendered inline by Mintlify's `mermaid` code block, with the ELK renderer enabled via the `%%{init}%%` directive on flowcharts.
+- **Mermaid** is rendered inline by Mintlify's `mermaid` code block. Flowcharts use the ELK renderer via `%%{init: {'flowchart': {'defaultRenderer': 'elk'}}}%%`. The ELK directive does not apply to sequence or ER diagrams, so it is omitted for C and D.
 - **D2** sources live under `docs/diagrams-comparison/d2/` and are compiled to SVG with `make diagrams-d2` (uses `d2 --layout=elk`). Compiled SVGs are committed under `docs/diagrams-comparison/d2-rendered/`.
 - **Excalidraw** sources live under `docs/diagrams-comparison/excalidraw/` and are rendered to SVG with `make diagrams-excalidraw` (uses `@swiftlysingh/excalidraw-cli`). Compiled SVGs are committed under `docs/diagrams-comparison/excalidraw-rendered/`.
 
@@ -13,46 +13,150 @@ Run `make diagrams` to (re-)render everything.
 
 ## A. Simple flowchart — user login
 
-_To be populated in Phase 2._
+Tests basic shapes, branching, and labels.
 
 ### Mermaid
 
+```mermaid
+%%{init: {'flowchart': {'defaultRenderer': 'elk'}}}%%
+flowchart TD
+  start([Start]) --> creds[Enter credentials]
+  creds --> validate{Validate?}
+  validate -- success --> dashboard[Dashboard]
+  validate -- failure --> error[Show error]
+  error -- retry --> creds
+```
+
 ### D2
 
+![D2 — login flow](/diagrams-comparison/d2-rendered/a-login-flow.svg)
+
 ### Excalidraw
+
+![Excalidraw — login flow](/diagrams-comparison/excalidraw-rendered/a-login-flow.svg)
 
 ## B. System architecture — small web app
 
-_To be populated in Phase 2._
+Tests containers/grouping and dense layouts: browser → CDN → load balancer → two app server instances → primary DB + read replica + Redis cache. App servers and data layer are grouped.
 
 ### Mermaid
 
+```mermaid
+%%{init: {'flowchart': {'defaultRenderer': 'elk'}}}%%
+flowchart LR
+  browser([Browser]) --> cdn[CDN]
+  cdn --> lb[Load Balancer]
+  subgraph apps[App Servers]
+    app1[App Server 1]
+    app2[App Server 2]
+  end
+  lb --> app1
+  lb --> app2
+  subgraph data[Data Layer]
+    db[(Primary DB)]
+    replica[(Read Replica)]
+    cache[(Redis)]
+  end
+  app1 --> db
+  app1 --> replica
+  app1 --> cache
+  app2 --> db
+  app2 --> replica
+  app2 --> cache
+  db -. replication .-> replica
+```
+
 ### D2
+
+![D2 — architecture](/diagrams-comparison/d2-rendered/b-architecture.svg)
 
 ### D2 (sketch mode)
 
+![D2 sketch — architecture](/diagrams-comparison/d2-rendered/b-architecture-sketch.svg)
+
 ### Excalidraw
+
+![Excalidraw — architecture](/diagrams-comparison/excalidraw-rendered/b-architecture.svg)
 
 ## C. Sequence diagram — OAuth 2.0 authorization code
 
-_To be populated in Phase 2._
+Tests how each tool handles sequence/interaction diagrams. Mermaid and D2 both support sequence diagrams natively. Excalidraw has no native sequence syntax, so the version below is a hand-built swim-lane approximation (4 actors with vertical lifelines and labeled message arrows).
 
 ### Mermaid
 
+```mermaid
+sequenceDiagram
+  participant U as User
+  participant C as Client App
+  participant A as Auth Server
+  participant R as Resource Server
+  U->>C: 1. Click "Log in"
+  C->>A: 2. Redirect to /authorize
+  A->>U: 3. Show login page
+  U->>A: 4. Submit credentials + consent
+  A->>C: 5. Redirect with auth code
+  C->>A: 6. POST /token (code + secret)
+  A-->>C: 7. Access token (+ refresh)
+  C->>R: 8. GET /api with token
+  R-->>C: 9. Return protected resource
+```
+
 ### D2
 
+![D2 — OAuth sequence](/diagrams-comparison/d2-rendered/c-oauth-sequence.svg)
+
 ### Excalidraw
+
+![Excalidraw — OAuth sequence (swim-lane)](/diagrams-comparison/excalidraw-rendered/c-oauth-sequence.svg)
 
 ## D. ER-style data model — User / Order / Product
 
-_To be populated in Phase 2._
+Tests how each tool handles structured data shapes: three entities with fields and relationships.
 
 ### Mermaid
 
+```mermaid
+erDiagram
+  USER ||--o{ ORDER : places
+  ORDER }|--|{ PRODUCT : contains
+  USER {
+    int id PK
+    string email
+    string name
+    datetime created_at
+  }
+  ORDER {
+    int id PK
+    int user_id FK
+    decimal total
+    string status
+    datetime placed_at
+  }
+  PRODUCT {
+    int id PK
+    string sku
+    string name
+    decimal price
+  }
+```
+
 ### D2
+
+![D2 — ER model](/diagrams-comparison/d2-rendered/d-er-model.svg)
 
 ### Excalidraw
 
+Excalidraw has no native ER table shape — the version below is a hand-built approximation using a colored header band over a list of text rows. The PK/FK markers are inline labels.
+
+![Excalidraw — ER model](/diagrams-comparison/excalidraw-rendered/d-er-model.svg)
+
 ## Summary
 
-_To be populated in Phase 2._
+Numbers for **diagram B** (architecture diagram — the densest of the four):
+
+| Tool | Source lines (B) | Build step? | Rendered output size (B) |
+| --- | --- | --- | --- |
+| Mermaid (ELK) | 22 (inline in this .mdx) | No — rendered live by Mintlify | n/a (inline SVG, no committed file) |
+| D2 | 30 | Yes — `make diagrams-d2` | 31 KB SVG |
+| D2 (sketch mode) | 36 | Yes — `make diagrams-d2` | 126 KB SVG |
+| Excalidraw | 478 | Yes — `make diagrams-excalidraw` | 28 KB SVG |
