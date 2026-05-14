@@ -1,13 +1,30 @@
 direction: down
 
-start: Start {shape: oval}
-creds: Enter credentials
-validate: Validate? {shape: diamond}
-dashboard: Dashboard
-error: Show error
+start: Start {
+  shape: oval
+  style.fill: "#a5d8ff"
+  style.stroke: "#1e1e1e"
+}
+creds: Enter credentials {
+  style.fill: "#ffd8a8"
+  style.stroke: "#1e1e1e"
+}
+validate: Validate? {
+  shape: diamond
+  style.fill: "#fff3bf"
+  style.stroke: "#1e1e1e"
+}
+dashboard: Dashboard {
+  style.fill: "#b2f2bb"
+  style.stroke: "#1e1e1e"
+}
+error: Show error {
+  style.fill: "#ffc9c9"
+  style.stroke: "#1e1e1e"
+}
 
 start -> creds
 creds -> validate
-validate -> dashboard: success
-validate -> error: failure
-error -> creds: retry
+validate -> dashboard: success {style.stroke: "#22c55e"}
+validate -> error: failure {style.stroke: "#ef4444"}
+error -> creds: retry {style.stroke: "#757575"}

@@ -1,5 +1,7 @@
 User: {
   shape: sql_table
+  style.fill: "#a5d8ff"
+  style.stroke: "#1e1e1e"
   id: int {constraint: primary_key}
   email: string
   name: string
@@ -8,6 +10,8 @@ User: {
 
 Order: {
   shape: sql_table
+  style.fill: "#ffd8a8"
+  style.stroke: "#1e1e1e"
   id: int {constraint: primary_key}
   user_id: int {constraint: foreign_key}
   total: decimal
@@ -17,11 +21,13 @@ Order: {
 
 Product: {
   shape: sql_table
+  style.fill: "#b2f2bb"
+  style.stroke: "#1e1e1e"
   id: int {constraint: primary_key}
   sku: string
   name: string
   price: decimal
 }
 
-User.id -> Order.user_id: places (1..N)
-Order -> Product: contains (N..M)
+User.id -> Order.user_id: places (1..N) {style.stroke: "#4a9eed"}
+Order -> Product: contains (N..M) {style.stroke: "#22c55e"}

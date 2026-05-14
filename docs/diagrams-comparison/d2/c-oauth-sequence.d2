@@ -1,9 +1,21 @@
 shape: sequence_diagram
 
-user: User
-client: Client App
-auth: Auth Server
-resource: Resource Server
+user: User {
+  style.fill: "#a5d8ff"
+  style.stroke: "#4a9eed"
+}
+client: Client App {
+  style.fill: "#d0bfff"
+  style.stroke: "#8b5cf6"
+}
+auth: Auth Server {
+  style.fill: "#ffd8a8"
+  style.stroke: "#f59e0b"
+}
+resource: Resource Server {
+  style.fill: "#b2f2bb"
+  style.stroke: "#22c55e"
+}
 
 user -> client: 1. Click "Log in"
 client -> auth: 2. Redirect to /authorize
