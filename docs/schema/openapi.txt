@@ -6850,6 +6850,7 @@
             "session.undrained": "#/components/schemas/TypedEventStreamEnvelopeSessionUndrained",
             "session.updated": "#/components/schemas/TypedEventStreamEnvelopeSessionUpdated",
             "session.woke": "#/components/schemas/TypedEventStreamEnvelopeSessionWoke",
+            "session.work_query_failed": "#/components/schemas/TypedEventStreamEnvelopeSessionWorkQueryFailed",
             "supervisor.fs_pressure.skipped_tick": "#/components/schemas/TypedEventStreamEnvelopeSupervisorFsPressureSkippedTick",
             "worker.operation": "#/components/schemas/TypedEventStreamEnvelopeWorkerOperation"
           },
@@ -6993,6 +6994,9 @@
           },
           {
             "$ref": "#/components/schemas/TypedEventStreamEnvelopeSessionWoke"
+          },
+          {
+            "$ref": "#/components/schemas/TypedEventStreamEnvelopeSessionWorkQueryFailed"
           },
           {
             "$ref": "#/components/schemas/TypedEventStreamEnvelopeSupervisorFsPressureSkippedTick"
@@ -7503,6 +7507,7 @@
                 "session.max_age_killed",
                 "session.suspended",
                 "session.updated",
+                "session.work_query_failed",
                 "bead.created",
                 "bead.closed",
                 "bead.updated",
@@ -9029,6 +9034,48 @@
         "title": "TypedEventStreamEnvelope session.woke",
         "type": "object"
       },
+      "TypedEventStreamEnvelopeSessionWorkQueryFailed": {
+        "additionalProperties": false,
+        "properties": {
+          "actor": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/SessionLifecyclePayload"
+          },
+          "seq": {
+            "format": "int64",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "subject": {
+            "type": "string"
+          },
+          "ts": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "type": {
+            "const": "session.work_query_failed",
+            "type": "string"
+          },
+          "workflow": {
+            "$ref": "#/components/schemas/WorkflowEventProjection"
+          }
+        },
+        "required": [
+          "seq",
+          "type",
+          "ts",
+          "actor",
+          "payload"
+        ],
+        "title": "TypedEventStreamEnvelope session.work_query_failed",
+        "type": "object"
+      },
       "TypedEventStreamEnvelopeSupervisorFsPressureSkippedTick": {
         "additionalProperties": false,
         "properties": {
@@ -9163,6 +9210,7 @@
             "session.undrained": "#/components/schemas/TypedTaggedEventStreamEnvelopeSessionUndrained",
             "session.updated": "#/components/schemas/TypedTaggedEventStreamEnvelopeSessionUpdated",
             "session.woke": "#/components/schemas/TypedTaggedEventStreamEnvelopeSessionWoke",
+            "session.work_query_failed": "#/components/schemas/TypedTaggedEventStreamEnvelopeSessionWorkQueryFailed",
             "supervisor.fs_pressure.skipped_tick": "#/components/schemas/TypedTaggedEventStreamEnvelopeSupervisorFsPressureSkippedTick",
             "worker.operation": "#/components/schemas/TypedTaggedEventStreamEnvelopeWorkerOperation"
           },
@@ -9306,6 +9354,9 @@
           },
           {
             "$ref": "#/components/schemas/TypedTaggedEventStreamEnvelopeSessionWoke"
+          },
+          {
+            "$ref": "#/components/schemas/TypedTaggedEventStreamEnvelopeSessionWorkQueryFailed"
           },
           {
             "$ref": "#/components/schemas/TypedTaggedEventStreamEnvelopeSupervisorFsPressureSkippedTick"
@@ -9863,6 +9914,7 @@
                 "session.max_age_killed",
                 "session.suspended",
                 "session.updated",
+                "session.work_query_failed",
                 "bead.created",
                 "bead.closed",
                 "bead.updated",
@@ -11528,6 +11580,52 @@
           "city"
         ],
         "title": "TypedTaggedEventStreamEnvelope session.woke",
+        "type": "object"
+      },
+      "TypedTaggedEventStreamEnvelopeSessionWorkQueryFailed": {
+        "additionalProperties": false,
+        "properties": {
+          "actor": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "payload": {
+            "$ref": "#/components/schemas/SessionLifecyclePayload"
+          },
+          "seq": {
+            "format": "int64",
+            "minimum": 0,
+            "type": "integer"
+          },
+          "subject": {
+            "type": "string"
+          },
+          "ts": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "type": {
+            "const": "session.work_query_failed",
+            "type": "string"
+          },
+          "workflow": {
+            "$ref": "#/components/schemas/WorkflowEventProjection"
+          }
+        },
+        "required": [
+          "seq",
+          "type",
+          "ts",
+          "actor",
+          "payload",
+          "city"
+        ],
+        "title": "TypedTaggedEventStreamEnvelope session.work_query_failed",
         "type": "object"
       },
       "TypedTaggedEventStreamEnvelopeSupervisorFsPressureSkippedTick": {

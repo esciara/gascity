@@ -41,12 +41,18 @@ const (
 	SessionMaxAgeKilled = "session.max_age_killed"
 	SessionSuspended    = "session.suspended"
 	SessionUpdated      = "session.updated"
-	ConvoyCreated       = "convoy.created"
-	ConvoyClosed        = "convoy.closed"
-	ControllerStarted   = "controller.started"
-	ControllerStopped   = "controller.stopped"
-	CitySuspended       = "city.suspended"
-	CityResumed         = "city.resumed"
+	// SessionWorkQueryFailed fires when an agent's work-discovery query
+	// subprocess is killed by an external signal or aborted by the
+	// runner-imposed timeout before producing output. Without it a
+	// killed startup nudge dies into unknown state with no cause on the
+	// event bus for the reconciler to escalate (issues #1496/#1497).
+	SessionWorkQueryFailed = "session.work_query_failed"
+	ConvoyCreated          = "convoy.created"
+	ConvoyClosed           = "convoy.closed"
+	ControllerStarted      = "controller.started"
+	ControllerStopped      = "controller.stopped"
+	CitySuspended          = "city.suspended"
+	CityResumed            = "city.resumed"
 	// Typed async request result events. 5 success types (one per
 	// operation, fully typed payload) + 1 shared failure type.
 	RequestResultCityCreate     = "request.result.city.create"
@@ -91,6 +97,7 @@ var KnownEventTypes = []string{
 	SessionWoke, SessionStopped, SessionCrashed,
 	SessionDraining, SessionUndrained, SessionQuarantined,
 	SessionIdleKilled, SessionMaxAgeKilled, SessionSuspended, SessionUpdated,
+	SessionWorkQueryFailed,
 	BeadCreated, BeadClosed, BeadUpdated,
 	MailSent, MailRead, MailArchived, MailMarkedRead, MailMarkedUnread,
 	MailReplied, MailDeleted,
