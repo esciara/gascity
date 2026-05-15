@@ -51,12 +51,18 @@ const (
 	// policy (commit-and-push, clear-assignee-and-respawn, or escalate).
 	// See gastownhall/gascity#2293.
 	SessionDrainAckedWithAssignedWork = "session.drain_acked_with_assigned_work"
-	ConvoyCreated                     = "convoy.created"
-	ConvoyClosed                      = "convoy.closed"
-	ControllerStarted                 = "controller.started"
-	ControllerStopped                 = "controller.stopped"
-	CitySuspended                     = "city.suspended"
-	CityResumed                       = "city.resumed"
+	// SessionWorkQueryFailed fires when an agent's work-discovery query
+	// subprocess is killed by an external signal or aborted by the
+	// runner-imposed timeout before producing output. Without it a
+	// killed startup nudge dies into unknown state with no cause on the
+	// event bus for the reconciler to escalate (issues #1496/#1497).
+	SessionWorkQueryFailed = "session.work_query_failed"
+	ConvoyCreated          = "convoy.created"
+	ConvoyClosed           = "convoy.closed"
+	ControllerStarted      = "controller.started"
+	ControllerStopped      = "controller.stopped"
+	CitySuspended          = "city.suspended"
+	CityResumed            = "city.resumed"
 	// Typed async request result events. 5 success types (one per
 	// operation, fully typed payload) + 1 shared failure type.
 	RequestResultCityCreate     = "request.result.city.create"
@@ -103,6 +109,7 @@ var KnownEventTypes = []string{
 	SessionDraining, SessionUndrained, SessionQuarantined,
 	SessionIdleKilled, SessionMaxAgeKilled, SessionSuspended, SessionUpdated,
 	SessionDrainAckedWithAssignedWork,
+	SessionWorkQueryFailed,
 	BeadCreated, BeadClosed, BeadUpdated,
 	MailSent, MailRead, MailArchived, MailMarkedRead, MailMarkedUnread,
 	MailReplied, MailDeleted,
