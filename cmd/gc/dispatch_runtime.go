@@ -442,7 +442,7 @@ func drainWorkflowServeWork(agentCfg config.Agent, cityPath, storePath, workQuer
 			// bus so the reconciler has a named cause to escalate on
 			// rather than the session dying silently (issues #1496/#1497).
 			emitWorkQueryFailure(openCityRecorderAt(cityPath, stderr),
-				os.Getenv("GC_SESSION_ID"), agentCfg.QualifiedName(), serveQuery, err)
+				os.Getenv("GC_SESSION_ID"), os.Getenv("GC_TEMPLATE"), serveQuery, err)
 			return result, fmt.Errorf("querying control work for %s: %w", agentCfg.QualifiedName(), err)
 		}
 		if len(queue) == 0 {

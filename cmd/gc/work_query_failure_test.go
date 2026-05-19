@@ -50,6 +50,19 @@ func TestEmitWorkQueryFailureRecordsEventOnKill(t *testing.T) {
 	if !rec.hasSubject("demo/agent") {
 		t.Fatalf("expected event subject to be the template, got %+v", rec.events)
 	}
+	if len(rec.events) != 1 {
+		t.Fatalf("recorded events = %d, want 1", len(rec.events))
+	}
+	payload := decodeSessionLifecyclePayload(t, rec.events[0])
+	if payload.SessionID != "gm-abc123" {
+		t.Fatalf("payload SessionID = %q, want gm-abc123", payload.SessionID)
+	}
+	if payload.Template != "demo/agent" {
+		t.Fatalf("payload Template = %q, want demo/agent", payload.Template)
+	}
+	if payload.Reason != "work query killed (signal: killed)" {
+		t.Fatalf("payload Reason = %q, want work query killed (signal: killed)", payload.Reason)
+	}
 }
 
 func TestEmitWorkQueryFailureFallsBackToSessionIDSubject(t *testing.T) {
@@ -59,6 +72,16 @@ func TestEmitWorkQueryFailureFallsBackToSessionIDSubject(t *testing.T) {
 	}
 	if !rec.hasSubject("gm-xyz") {
 		t.Fatalf("expected subject to fall back to the session ID, got %+v", rec.events)
+	}
+}
+
+func TestEmitWorkQueryFailureSkipsEmptySessionID(t *testing.T) {
+	rec := &memRecorder{}
+	if emitWorkQueryFailure(rec, "", "demo/agent", "cmd", errors.New("signal: killed")) {
+		t.Fatal("expected killed work query without a session ID to be left on the stderr path")
+	}
+	if len(rec.events) != 0 {
+		t.Fatalf("expected no events recorded, got %+v", rec.events)
 	}
 }
 

@@ -51,11 +51,12 @@ const (
 	// policy (commit-and-push, clear-assignee-and-respawn, or escalate).
 	// See gastownhall/gascity#2293.
 	SessionDrainAckedWithAssignedWork = "session.drain_acked_with_assigned_work"
-	// SessionWorkQueryFailed fires when an agent's work-discovery query
-	// subprocess is killed by an external signal or aborted by the
-	// runner-imposed timeout before producing output. Without it a
-	// killed startup nudge dies into unknown state with no cause on the
-	// event bus for the reconciler to escalate (issues #1496/#1497).
+	// SessionWorkQueryFailed fires when the current managed session's
+	// work-discovery query subprocess is killed by an external signal or
+	// aborted by the runner-imposed timeout before producing output.
+	// Emission requires the current session ID so the lifecycle payload
+	// remains correlated; the companion reconciler handler is tracked in
+	// #1497.
 	SessionWorkQueryFailed = "session.work_query_failed"
 	ConvoyCreated          = "convoy.created"
 	ConvoyClosed           = "convoy.closed"

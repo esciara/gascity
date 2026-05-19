@@ -42,17 +42,20 @@ func classifyWorkQueryKill(err error) (reason string, killed bool) {
 // work-query subprocess was killed or timed out, giving the reconciler a
 // named cause to escalate on instead of letting the session die silently
 // into unknown state (issue #1496, companion #1497). Best-effort: a nil
-// recorder is treated as a discard. Returns true when the failure was a
-// kill/timeout (and thus reported), false for ordinary errors.
+// recorder is treated as a discard. Returns true when the failure was recorded,
+// false for ordinary errors or when no current session ID is available.
 func emitWorkQueryFailure(rec events.Recorder, sessionID, template, command string, err error) bool {
 	reason, killed := classifyWorkQueryKill(err)
 	if !killed {
 		return false
 	}
+	sessionID = strings.TrimSpace(sessionID)
+	if sessionID == "" {
+		return false
+	}
 	if rec == nil {
 		rec = events.Discard
 	}
-	sessionID = strings.TrimSpace(sessionID)
 	template = strings.TrimSpace(template)
 	subject := template
 	if subject == "" {
