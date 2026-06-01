@@ -160,6 +160,7 @@
         "group": "Internals",
         "pages": [
           "internals/index",
+          "internals/meow-and-roles",
           "internals/beads-topology"
         ]
       },

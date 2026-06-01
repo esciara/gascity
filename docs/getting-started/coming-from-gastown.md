@@ -180,6 +180,11 @@ This matters when you change the system:
 
 That is a feature, not a missing abstraction.
 
+For the underlying reason this works — how the MEOW stack (beads,
+formulas, molecules) turns a role's work and procedure into data and
+leaves only judgment in the prompt — see
+[MEOW and Roles](/internals/meow-and-roles).
+
 It is also worth separating two kinds of changes:
 
 - **local city change**: edit `city.toml`, add rig overrides, add patches, or

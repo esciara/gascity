@@ -14,6 +14,9 @@ down to the files and processes that produce it.
 
 ## Pages
 
+- [MEOW and Roles](/internals/meow-and-roles) — why Gas City ships zero
+  built-in roles, and how the Molecular Expression of Work (beads,
+  formulas, molecules) lets you build any role from configuration.
 - [Beads Storage Topology](/internals/beads-topology) — what backs `gc rig`:
   the shared Dolt server, per-rig `.beads/` directories, and why `bd list`
   from a rig sees only that rig's beads.
