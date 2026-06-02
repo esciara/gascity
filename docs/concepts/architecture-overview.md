@@ -88,33 +88,11 @@ Structurally, a city wraps a controller and a beads store, registers one or
 more rigs, and runs agents as live sessions. The event bus sits alongside as
 the observation channel everything writes to.
 
-```mermaid
-flowchart TB
-    subgraph City["City (gc init)"]
-        Controller["Controller<br/>reconciliation runtime"]
-        Events[("Event Bus<br/>append-only log")]
-        Beads[("Beads Store<br/>tasks · mail · molecules · convoys")]
-
-        subgraph Rigs["Rigs (gc rig add)"]
-            RigA["Rig: repo-a<br/>own beads + routing"]
-            RigB["Rig: repo-b<br/>own beads + routing"]
-        end
-
-        subgraph Sessions["Live Sessions"]
-            S1["Agent session<br/>(tmux pane)"]
-            S2["Agent session<br/>(tmux pane)"]
-        end
-    end
-
-    Config["city.toml + prompt templates<br/>(all role behavior)"] --> Controller
-    Controller -->|reconciles| Sessions
-    Controller -->|reads/writes| Beads
-    Controller -->|publishes/watches| Events
-    Sessions -->|claim & update work| Beads
-    Sessions -->|emit activity| Events
-    RigA --> Beads
-    RigB --> Beads
-```
+![Structural diagram of a Gas City: the city wraps the controller, beads store,
+and event bus, with rigs and live agent sessions inside it. Config drives the
+controller; the controller reconciles sessions and reads/writes the store and
+event bus; sessions claim and update work in the store and emit activity to the
+event bus.](/diagrams/excalidraw-rendered/architecture-structure.svg)
 
 Notice what the diagram does *not* contain: any specific role. The controller
 reconciles whatever agents the config declares. Remove an agent from
@@ -144,30 +122,11 @@ to a finished result.
 6. **Work completes.** The agent closes the bead. The session may shut down or
    stay warm for the next item; either way the result persists in the store.
 
-```mermaid
-sequenceDiagram
-    actor You
-    participant CLI as gc CLI
-    participant Beads as Beads Store
-    participant Ctrl as Controller
-    participant Sess as Agent Session
-    participant Bus as Event Bus
-
-    You->>CLI: gc sling claude "build X"
-    CLI->>Beads: create work bead + route to agent
-    CLI->>Bus: record sling event
-    loop reconciliation tick
-        Ctrl->>Beads: any ready work without a session?
-        Ctrl->>Sess: spawn session (render prompt)
-    end
-    Sess->>Beads: query my hooked work
-    Sess->>Sess: edit rig, run commands
-    Sess->>Beads: update bead progress
-    Sess->>Bus: emit activity events
-    You->>Beads: bd show <id> --watch
-    Beads-->>You: live status
-    Sess->>Beads: close bead (done)
-```
+![Lifecycle diagram of one piece of work: you sling it, the beads store records
+and routes the bead, the controller reconciles and spawns a session, the session
+renders its prompt and queries its hooked work, the agent executes in the rig,
+and the bead is updated and closed. Each step is recorded on the event bus, and
+you watch live status with bd show --watch.](/diagrams/excalidraw-rendered/work-lifecycle.svg)
 
 ## Agent spawning, lifecycle, and communication
 
