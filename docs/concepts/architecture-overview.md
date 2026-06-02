@@ -92,7 +92,7 @@ the observation channel everything writes to.
 and event bus, with rigs and live agent sessions inside it. Config drives the
 controller; the controller reconciles sessions and reads/writes the store and
 event bus; sessions claim and update work in the store and emit activity to the
-event bus.](/diagrams/excalidraw-rendered/architecture-structure.svg)
+event bus.](../diagrams/excalidraw-rendered/architecture-structure.svg)
 
 Notice what the diagram does *not* contain: any specific role. The controller
 reconciles whatever agents the config declares. Remove an agent from
@@ -126,7 +126,7 @@ to a finished result.
 and routes the bead, the controller reconciles and spawns a session, the session
 renders its prompt and queries its hooked work, the agent executes in the rig,
 and the bead is updated and closed. Each step is recorded on the event bus, and
-you watch live status with bd show --watch.](/diagrams/excalidraw-rendered/work-lifecycle.svg)
+you watch live status with bd show --watch.](../diagrams/excalidraw-rendered/work-lifecycle.svg)
 
 ## Agent spawning, lifecycle, and communication
 
