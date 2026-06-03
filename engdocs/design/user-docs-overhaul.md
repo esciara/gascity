@@ -154,7 +154,7 @@ This is the first cut. Each item below is sized roughly to be a single PR / issu
 - Update `docs/index.mdx` and `docs/getting-started/coming-from-gastown.md` to link to this page instead of `engdocs/`.
 - Add to `docs/docs.json` nav.
 
-**Issue 2 — Primitives reference page.** Addresses F1(b). Lands in lockstep with Issue 1. **Recorded:** [#3014](https://github.com/gastownhall/gascity/issues/3014). **Implemented:** TBD.
+**Issue 2 — Primitives reference page.** Addresses F1(b). Lands in lockstep with Issue 1. **Recorded:** [#3014](https://github.com/gastownhall/gascity/issues/3014). **Implemented:** [PR #3034](https://github.com/gastownhall/gascity/pull/3034).
 - New page: `docs/concepts/primitives.md`.
 - Promote and rewrite `engdocs/architecture/nine-concepts.md` and `glossary.md` for a user audience.
 - Linked *from* the architecture overview, not the entry point.
@@ -164,7 +164,7 @@ This is the first cut. Each item below is sized roughly to be a single PR / issu
 - Verify all cross-references (Tutorial 04+, guides) stay consistent.
 - Move existing PackV1 examples to a clearly-labeled appendix inside `guides/migrating-to-pack-vnext.md` (or remove if redundant with that guide).
 
-**Issue 4 — Refresh stale version strings and "contributors first" framing.** Addresses F12. **Recorded:** [#3015](https://github.com/gastownhall/gascity/issues/3015). **Implemented:** TBD.
+**Issue 4 — Refresh stale version strings and "contributors first" framing.** Addresses F12. **Recorded:** [#3015](https://github.com/gastownhall/gascity/issues/3015). **Implemented:** [PR #3044](https://github.com/gastownhall/gascity/pull/3044).
 - Update Tutorial 01 sample output (and any others) to v1.1.0.
 - Update `docs/index.mdx` opening framing to "user-first".
 - Sweep for any other stale concept names.
