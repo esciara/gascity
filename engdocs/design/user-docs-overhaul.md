@@ -147,14 +147,14 @@ This is the first cut. Each item below is sized roughly to be a single PR / issu
 
 ### 4.1 Milestone 1 — Stop the bleeding (P0)
 
-**Issue 1 — Architecture overview page + diagrams.** Addresses F1(a). **Recorded as** [#2101](https://github.com/gastownhall/gascity/issues/2101). **Implemented via** [PR #2981](https://github.com/gastownhall/gascity/pull/2981).
+**Issue 1 — Architecture overview page + diagrams.** Addresses F1(a). **Recorded:** [#2101](https://github.com/gastownhall/gascity/issues/2101). **Implemented:** [PR #2981](https://github.com/gastownhall/gascity/pull/2981).
 - New page: `docs/concepts/architecture-overview.md`.
 - Top-down prose: what Gas City is, how the parts hang together, how work flows, how agents are kept alive and communicate.
 - At least two diagrams (Excalidraw — see [`engdocs/proposals/excalidraw-diagrams.md`](../proposals/excalidraw-diagrams.md) for toolchain and authoring workflow): structural and interactional. Health/keepalive a strong third.
 - Update `docs/index.mdx` and `docs/getting-started/coming-from-gastown.md` to link to this page instead of `engdocs/`.
 - Add to `docs/docs.json` nav.
 
-**Issue 2 — Primitives reference page.** Addresses F1(b). Lands in lockstep with Issue 1.
+**Issue 2 — Primitives reference page.** Addresses F1(b). Lands in lockstep with Issue 1. **Recorded:** [#3014](https://github.com/gastownhall/gascity/issues/3014). **Implemented:** TBD.
 - New page: `docs/concepts/primitives.md`.
 - Promote and rewrite `engdocs/architecture/nine-concepts.md` and `glossary.md` for a user audience.
 - Linked *from* the architecture overview, not the entry point.
