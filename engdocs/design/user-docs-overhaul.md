@@ -268,7 +268,8 @@ Each issue cites the finding(s) it addresses by shortcode (F1, F2,
 ### 4.1 Milestone 1 — Stop the bleeding (P0)
 
 **Issue 1 — Architecture overview page + diagrams.** Addresses
-F1(a).
+F1(a). **Implemented:** [#2101](https://github.com/gastownhall/gascity/issues/2101)
+via [PR #2981](https://github.com/gastownhall/gascity/pull/2981).
 - New page: `docs/concepts/architecture-overview.md`.
 - Top-down prose: what Gas City is, how the parts hang together,
   how work flows, how agents are kept alive and communicate.
