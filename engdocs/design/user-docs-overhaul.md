@@ -159,7 +159,7 @@ This is the first cut. Each item below is sized roughly to be a single PR / issu
 - Promote and rewrite `engdocs/architecture/nine-concepts.md` and `glossary.md` for a user audience.
 - Linked *from* the architecture overview, not the entry point.
 
-**Issue 3 — Migrate Tutorials 02 and 03 to PackV2 syntax.** Addresses F2. **Recorded:** [#3013](https://github.com/gastownhall/gascity/issues/3013). **Implemented:** TBD.
+**Issue 3 — Migrate Tutorials 02 and 03 to PackV2 syntax.** Addresses F2. **Recorded:** [#3013](https://github.com/gastownhall/gascity/issues/3013). **Implemented:** Tutorials 02/03 were already on the PackV2 `agents/<name>/` layout on `main` (legacy `[[agent]]` authoring deprecated in [#2117](https://github.com/gastownhall/gascity/pull/2117)); a cross-reference audit confirmed the full 01→07 tutorial path plus `coming-from-gastown.md` and `shareable-packs.md` are PackV1-free, and fixed the one remaining PackV1-as-canonical example in `docs/concepts/primitives.md`. [#3013](https://github.com/gastownhall/gascity/issues/3013) closed as completed.
 - Rewrite the `agents/<name>/agent.toml` + `prompt.md` flow.
 - Verify all cross-references (Tutorial 04+, guides) stay consistent.
 - Move existing PackV1 examples to a clearly-labeled appendix inside `guides/migrating-to-pack-vnext.md` (or remove if redundant with that guide).
