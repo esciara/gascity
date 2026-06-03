@@ -272,7 +272,9 @@ F1(a).
 - New page: `docs/concepts/architecture-overview.md`.
 - Top-down prose: what Gas City is, how the parts hang together,
   how work flows, how agents are kept alive and communicate.
-- At least two diagrams (Mermaid, so they live in source):
+- At least two diagrams (Excalidraw — see
+  [`engdocs/proposals/excalidraw-diagrams.md`](../proposals/excalidraw-diagrams.md)
+  for toolchain and authoring workflow):
   structural and interactional. Health/keepalive a strong third.
 - Update `docs/index.mdx` and
   `docs/getting-started/coming-from-gastown.md` to link to this
