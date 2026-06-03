@@ -147,7 +147,7 @@ This is the first cut. Each item below is sized roughly to be a single PR / issu
 
 ### 4.1 Milestone 1 — Stop the bleeding (P0)
 
-**Issue 1 — Architecture overview page + diagrams.** Addresses F1(a). **Implemented:** [#2101](https://github.com/gastownhall/gascity/issues/2101) via [PR #2981](https://github.com/gastownhall/gascity/pull/2981).
+**Issue 1 — Architecture overview page + diagrams.** Addresses F1(a). **Recorded as** [#2101](https://github.com/gastownhall/gascity/issues/2101). **Implemented via** [PR #2981](https://github.com/gastownhall/gascity/pull/2981).
 - New page: `docs/concepts/architecture-overview.md`.
 - Top-down prose: what Gas City is, how the parts hang together, how work flows, how agents are kept alive and communicate.
 - At least two diagrams (Excalidraw — see [`engdocs/proposals/excalidraw-diagrams.md`](../proposals/excalidraw-diagrams.md) for toolchain and authoring workflow): structural and interactional. Health/keepalive a strong third.
@@ -159,12 +159,12 @@ This is the first cut. Each item below is sized roughly to be a single PR / issu
 - Promote and rewrite `engdocs/architecture/nine-concepts.md` and `glossary.md` for a user audience.
 - Linked *from* the architecture overview, not the entry point.
 
-**Issue 3 — Migrate Tutorials 02 and 03 to PackV2 syntax.** Addresses F2.
+**Issue 3 — Migrate Tutorials 02 and 03 to PackV2 syntax.** Addresses F2. **Recorded:** [#3013](https://github.com/gastownhall/gascity/issues/3013). **Implemented:** TBD.
 - Rewrite the `agents/<name>/agent.toml` + `prompt.md` flow.
 - Verify all cross-references (Tutorial 04+, guides) stay consistent.
 - Move existing PackV1 examples to a clearly-labeled appendix inside `guides/migrating-to-pack-vnext.md` (or remove if redundant with that guide).
 
-**Issue 4 — Refresh stale version strings and "contributors first" framing.** Addresses F12.
+**Issue 4 — Refresh stale version strings and "contributors first" framing.** Addresses F12. **Recorded:** [#3015](https://github.com/gastownhall/gascity/issues/3015). **Implemented:** TBD.
 - Update Tutorial 01 sample output (and any others) to v1.1.0.
 - Update `docs/index.mdx` opening framing to "user-first".
 - Sweep for any other stale concept names.
