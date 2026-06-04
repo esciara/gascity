@@ -60,7 +60,7 @@ Existing published asset to cross-reference from the overview:
 
 [Tutorial 02 — Agents](../../docs/tutorials/02-agents.md) and [Tutorial 03 — Sessions](../../docs/tutorials/03-sessions.md) still use the legacy `[[agent]]` TOML blocks, while [coming-from-gastown.md](../../docs/getting-started/coming-from-gastown.md) and [guides/shareable-packs.md](../../docs/guides/shareable-packs.md) teach the PackV2 `agents/<name>/` directory layout. A user following tutorials in order will write config that contradicts the migration guide they hit next.
 
-The project is currently at **v1.1.0**, well past the PackV2 cutover. PackV1 syntax in tutorials is unambiguous staleness, not a pre-release hedge.
+The project is currently at **v1.2.1**, well past the PackV2 cutover. PackV1 syntax in tutorials is unambiguous staleness, not a pre-release hedge.
 
 ### 2.3 F3 — Gas Town role recap missing (P1)
 
@@ -123,7 +123,7 @@ There is no canonical "minimal complete city" showing `pack.toml` + `city.toml` 
 
 ### 2.12 F12 — Staleness signals (P2)
 
-- [Tutorial 01 line ~26](../../docs/tutorials/01-cities-and-rigs.md) shows version `v0.13.4` in sample output. Current tag is **v1.1.0** — eight minor versions behind.
+- [Tutorial 01 line ~26](../../docs/tutorials/01-cities-and-rigs.md) shows version `v0.13.4` in sample output. Current tag is **v1.2.1** — eight minor versions behind.
 - [docs/index.mdx](../../docs/index.mdx) opens with "organized for external contributors first" — contradicts the goal of `docs/`.
 - General sweep needed for stale concept names (the former Agent Protocol primitive was removed `dd90ac0a` on 2026-03-08; user docs appear clean but worth a check).
 
@@ -136,7 +136,7 @@ Before issues are cut, the following are non-negotiable so individual PRs stay c
 1. **`docs/` is user-first.** No user-facing page may link into `engdocs/` as required reading. If `engdocs/` content is needed, promote it (with rewrite) into `docs/`.
 2. **One pack syntax in tutorials.** PackV2 (`agents/<name>/`) is canonical. PackV1 lives only in a clearly-labeled migration appendix.
 3. **Every concept page has a runnable example.** No conceptual page ships without at least one snippet a user can copy-paste.
-4. **Examples are versioned with the docs.** Reference output uses the current release (v1.1.0 at time of writing).
+4. **Examples are versioned with the docs.** Reference output uses the current release (v1.2.1 at time of writing).
 5. **`engdocs/` stays the source of truth for contributors.** When content is promoted, the original stays as a deeper contributor reference; the user-doc version links *back* (one-way).
 
 ---
@@ -165,7 +165,7 @@ This is the first cut. Each item below is sized roughly to be a single PR / issu
 - Move existing PackV1 examples to a clearly-labeled appendix inside `guides/migrating-to-pack-vnext.md` (or remove if redundant with that guide).
 
 **Issue 4 — Refresh stale version strings and "contributors first" framing.** Addresses F12. **Recorded:** [#3015](https://github.com/gastownhall/gascity/issues/3015). **Implemented:** [PR #3044](https://github.com/gastownhall/gascity/pull/3044).
-- Update Tutorial 01 sample output (and any others) to v1.1.0.
+- Update Tutorial 01 sample output (and any others) to v1.2.1 .
 - Update `docs/index.mdx` opening framing to "user-first".
 - Sweep for any other stale concept names.
 
